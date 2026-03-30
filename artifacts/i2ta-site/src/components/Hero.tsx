@@ -1,5 +1,4 @@
 import { useEffect, useRef } from "react";
-import { ArrowDown } from "lucide-react";
 
 export default function Hero() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -187,22 +186,6 @@ export default function Hero() {
         </div>
       </div>
 
-      <a
-        href="#sobre"
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 transition-opacity hover:opacity-70"
-        style={{ zIndex: 10 }}
-      >
-        <span
-          className="font-display tracking-widest uppercase"
-          style={{ fontSize: "0.65rem", color: "#00E0FF" }}
-        >
-          Scroll
-        </span>
-        <ArrowDown
-          size={20}
-          style={{ color: "#7B3FE4", animation: "bounce 1.8s ease-in-out infinite" }}
-        />
-      </a>
     </section>
   );
 }
