@@ -1,8 +1,11 @@
+import { useState, useCallback } from "react";
 import { Switch, Route, Router as WouterRouter } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { AnimatePresence } from "framer-motion";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/Home";
+import LoadingScreen from "@/components/ui/LoadingScreen";
 
 const queryClient = new QueryClient();
 
@@ -16,9 +19,18 @@ function Router() {
 }
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  const handleLoadComplete = useCallback(() => {
+    setIsLoading(false);
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
+        <AnimatePresence>
+          {isLoading && <LoadingScreen key="loader" onComplete={handleLoadComplete} />}
+        </AnimatePresence>
         <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
           <Router />
         </WouterRouter>
