@@ -1,13 +1,14 @@
 import { TimelineContent } from "@/components/ui/timeline-animation";
-import { Quote } from "lucide-react";
+import TestimonialSlider, { Testimonial } from "@/components/ui/testimonial-slider";
 
-const testimonials = [
+const testimonials: Testimonial[] = [
   {
     quote:
       "A parceria com o i2TA nos permitiu implementar soluções de IA que reduziram nossos custos operacionais em mais de 30%. A equipe tem um domínio técnico impressionante aliado a um profundo conhecimento da realidade amazônica.",
     name: "Carlos Mendonça",
     role: "Diretor de Inovação",
     org: "Polo Industrial de Manaus",
+    img: "https://ui-avatars.com/api/?name=Carlos+Mendon%C3%A7a&background=00E0FF&color=0A0F1C&size=96&bold=true",
     accent: "cyan",
   },
   {
@@ -16,6 +17,7 @@ const testimonials = [
     name: "Fernanda Castilho",
     role: "CEO",
     org: "TecnoAmazon S.A.",
+    img: "https://ui-avatars.com/api/?name=Fernanda+Castilho&background=7B3FE4&color=ffffff&size=96&bold=true",
     accent: "purple",
   },
   {
@@ -24,6 +26,7 @@ const testimonials = [
     name: "Dr. Rodrigo Lima",
     role: "Secretário de Ciência e Tecnologia",
     org: "Governo do Amazonas",
+    img: "https://ui-avatars.com/api/?name=Rodrigo+Lima&background=00E0FF&color=0A0F1C&size=96&bold=true",
     accent: "cyan",
   },
   {
@@ -32,6 +35,7 @@ const testimonials = [
     name: "Ana Paula Ferreira",
     role: "Diretora Executiva",
     org: "Instituto Amazônia Verde",
+    img: "https://ui-avatars.com/api/?name=Ana+Paula+Ferreira&background=7B3FE4&color=ffffff&size=96&bold=true",
     accent: "purple",
   },
   {
@@ -40,6 +44,7 @@ const testimonials = [
     name: "Marcos Vieira",
     role: "Superintendente de TI",
     org: "Grupo Bemol",
+    img: "https://ui-avatars.com/api/?name=Marcos+Vieira&background=00E0FF&color=0A0F1C&size=96&bold=true",
     accent: "cyan",
   },
   {
@@ -48,6 +53,7 @@ const testimonials = [
     name: "Dra. Lúcia Nascimento",
     role: "Coordenadora de Saúde Digital",
     org: "Secretaria Municipal de Saúde",
+    img: "https://ui-avatars.com/api/?name=L%C3%BAcia+Nascimento&background=7B3FE4&color=ffffff&size=96&bold=true",
     accent: "purple",
   },
   {
@@ -56,25 +62,10 @@ const testimonials = [
     name: "João Guilherme Santos",
     role: "Co-fundador & CTO",
     org: "DataRio Startups",
+    img: "https://ui-avatars.com/api/?name=Jo%C3%A3o+Guilherme+Santos&background=00E0FF&color=0A0F1C&size=96&bold=true",
     accent: "cyan",
   },
-] as const;
-
-type AccentColor = "cyan" | "purple";
-
-function getAccentStyles(accent: AccentColor) {
-  const isCyan = accent === "cyan";
-  return {
-    color: isCyan ? "var(--i2ta-cyan)" : "var(--i2ta-purple)",
-    bgLight: isCyan ? "rgba(0,224,255,0.07)" : "rgba(123,63,228,0.1)",
-    borderLight: isCyan ? "rgba(0,224,255,0.18)" : "rgba(123,63,228,0.25)",
-    iconBg: isCyan ? "rgba(0,224,255,0.12)" : "rgba(123,63,228,0.15)",
-    iconBorder: isCyan ? "rgba(0,224,255,0.25)" : "rgba(123,63,228,0.3)",
-    avatarBgStart: isCyan ? "rgba(0,224,255,0.2)" : "rgba(123,63,228,0.2)",
-    avatarBgEnd: isCyan ? "rgba(0,224,255,0.08)" : "rgba(123,63,228,0.08)",
-    avatarBorder: isCyan ? "rgba(0,224,255,0.3)" : "rgba(123,63,228,0.3)",
-  };
-}
+];
 
 export default function Testimonials() {
   return (
@@ -124,68 +115,9 @@ export default function Testimonials() {
           </p>
         </TimelineContent>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {testimonials.map((t, i) => {
-            const s = getAccentStyles(t.accent);
-
-            return (
-              <TimelineContent
-                key={i}
-                animationNum={i % 3}
-                className="glass-card p-7 flex flex-col gap-5"
-                style={{
-                  background: `linear-gradient(145deg, ${s.bgLight} 0%, rgba(255,255,255,0.008) 100%)`,
-                  borderColor: s.borderLight,
-                }}
-              >
-                <div
-                  className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
-                  style={{
-                    background: s.iconBg,
-                    border: `1px solid ${s.iconBorder}`,
-                    color: s.color,
-                  }}
-                >
-                  <Quote size={16} />
-                </div>
-
-                <p
-                  className="text-sm leading-relaxed flex-1"
-                  style={{ color: "#C8D0DC" }}
-                >
-                  &ldquo;{t.quote}&rdquo;
-                </p>
-
-                <div
-                  className="flex items-center gap-3 pt-3 border-t"
-                  style={{ borderColor: "rgba(255,255,255,0.06)" }}
-                >
-                  <div
-                    className="w-10 h-10 rounded-full flex items-center justify-center font-display font-bold text-sm flex-shrink-0"
-                    style={{
-                      background: `linear-gradient(135deg, ${s.avatarBgStart}, ${s.avatarBgEnd})`,
-                      border: `1px solid ${s.avatarBorder}`,
-                      color: s.color,
-                    }}
-                  >
-                    {t.name.charAt(0)}
-                  </div>
-                  <div>
-                    <p
-                      className="font-display font-semibold text-sm"
-                      style={{ color: "var(--i2ta-white)" }}
-                    >
-                      {t.name}
-                    </p>
-                    <p className="text-xs" style={{ color: "var(--i2ta-gray)" }}>
-                      {t.role} · {t.org}
-                    </p>
-                  </div>
-                </div>
-              </TimelineContent>
-            );
-          })}
-        </div>
+        <TimelineContent animationNum={1}>
+          <TestimonialSlider testimonials={testimonials} autoRotateInterval={7000} />
+        </TimelineContent>
       </div>
     </section>
   );
