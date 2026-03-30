@@ -16,6 +16,7 @@ export default function Navbar() {
     { href: "#cultura", label: "Cultura" },
     { href: "#servicos", label: "Serviços" },
     { href: "#diferenciais", label: "Diferenciais" },
+    { href: "#pesquisadores", label: "Pesquisadores" },
     { href: "#contato", label: "Contato" },
   ];
 
