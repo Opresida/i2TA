@@ -9,6 +9,7 @@ import Testimonials from "@/components/Testimonials";
 import Partners from "@/components/Partners";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import { useEffect } from "react";
 
 export default function Home() {
@@ -41,6 +42,7 @@ export default function Home() {
       <Partners />
       <Contact />
       <Footer />
+      <WhatsAppButton />
     </div>
   );
 }
