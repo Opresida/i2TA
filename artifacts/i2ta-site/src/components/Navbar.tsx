@@ -37,9 +37,12 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-20">
           <a href="#" className="flex-shrink-0 flex items-center">
             <img
-              src="https://i.imgur.com/bw6rmMQ.png"
+              src={scrolled
+                ? "https://i.imgur.com/S85l92Y.png"
+                : "https://i.imgur.com/bw6rmMQ.png"
+              }
               alt="i2TA - Instituto de Inteligência e Tecnologia Aplicada da Amazônia"
-              className="h-10 md:h-12 object-contain"
+              className="h-10 md:h-12 object-contain transition-all duration-500"
             />
           </a>
 
