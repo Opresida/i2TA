@@ -5,6 +5,7 @@ import MissionVisionValues from "@/components/MissionVisionValues";
 import Services from "@/components/Services";
 import Differentials from "@/components/Differentials";
 import Impact from "@/components/Impact";
+import Testimonials from "@/components/Testimonials";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import { useEffect } from "react";
@@ -35,6 +36,7 @@ export default function Home() {
       <Services />
       <Differentials />
       <Impact />
+      <Testimonials />
       <Contact />
       <Footer />
     </div>
