@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const services = [
   {
@@ -122,11 +122,33 @@ const services = [
 export default function Services() {
   const [active, setActive] = useState(0);
   const [panelKey, setPanelKey] = useState(0);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const activeRef = useRef(0);
   const s = services[active >= 0 ? active : 0];
+
+  const resetInterval = (fromIndex: number) => {
+    activeRef.current = fromIndex;
+    if (intervalRef.current) clearInterval(intervalRef.current);
+    intervalRef.current = setInterval(() => {
+      activeRef.current = (activeRef.current + 1) % services.length;
+      setActive(activeRef.current);
+      setPanelKey((k) => k + 1);
+    }, 4000);
+  };
+
+  useEffect(() => {
+    resetInterval(0);
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, []);
 
   const handleSelect = (i: number) => {
     setActive(i);
-    if (i >= 0) setPanelKey((k) => k + 1);
+    if (i >= 0) {
+      setPanelKey((k) => k + 1);
+      resetInterval(i);
+    }
   };
 
   return (

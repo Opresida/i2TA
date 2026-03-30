@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const tabs = [
   {
@@ -67,7 +67,30 @@ const odsBadges = [
 
 export default function MissionVisionValues() {
   const [active, setActive] = useState(0);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const activeRef = useRef(0);
   const tab = tabs[active];
+
+  const resetInterval = (fromIndex: number) => {
+    activeRef.current = fromIndex;
+    if (intervalRef.current) clearInterval(intervalRef.current);
+    intervalRef.current = setInterval(() => {
+      activeRef.current = (activeRef.current + 1) % tabs.length;
+      setActive(activeRef.current);
+    }, 4000);
+  };
+
+  useEffect(() => {
+    resetInterval(0);
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, []);
+
+  const handleTabClick = (i: number) => {
+    setActive(i);
+    resetInterval(i);
+  };
 
   return (
     <section
@@ -102,7 +125,7 @@ export default function MissionVisionValues() {
             {tabs.map((t, i) => (
               <button
                 key={t.id}
-                onClick={() => setActive(i)}
+                onClick={() => handleTabClick(i)}
                 className={`mvv-tab w-full text-left p-6 flex items-center gap-4 transition-all ${active === i ? "active" : ""}`}
                 style={{
                   "--tab-color": t.color,
