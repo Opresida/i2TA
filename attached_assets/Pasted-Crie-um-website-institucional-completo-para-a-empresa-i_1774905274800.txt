@@ -1,0 +1,131 @@
+Crie um website institucional completo para a empresa **i2TA – Instituto de Inteligência & Tecnologia Aplicada**, utilizando como base o manual de marca em HTML e o documento Word anexado como referência estratégica.
+
+O site deve seguir um posicionamento **premium, tecnológico e institucional**, transmitindo autoridade, inovação e sofisticação, como uma empresa de alto nível em inteligência e tecnologia.
+
+### 🎯 OBJETIVO
+
+Desenvolver um site institucional moderno, responsivo e visualmente impactante, com foco em:
+
+* Autoridade de marca
+* Clareza de serviços
+* Experiência do usuário (UI/UX)
+* Conversão (contato e geração de leads)
+
+---
+
+### 🎨 DIRETRIZES DE DESIGN
+
+* Seguir rigorosamente a identidade visual definida no manual de marca (cores, tipografia, estilo)
+* Estética: **tech, futurista, minimalista**
+* Inspiração: empresas SaaS, fintechs e consultorias globais
+* Usar:
+
+  * Gradientes sutis
+  * Efeitos de glow (leve, elegante)
+  * Glassmorphism (quando fizer sentido)
+  * Espaçamento amplo (clean)
+
+---
+
+### 🧠 UI / UX (MUITO IMPORTANTE)
+
+* Interface fluida e moderna
+* Navegação simples e intuitiva
+* Microinterações elegantes
+* Hover effects sofisticados (botões, cards, links)
+* Transições suaves entre seções (fade, slide, reveal)
+* Responsividade total (mobile, tablet e desktop)
+
+---
+
+### 🧱 ESTRUTURA DO SITE
+
+#### 1. HERO (Topo)
+
+* Nome da empresa
+* Slogan forte
+* Breve descrição
+* Botão CTA (ex: “Fale Conosco”)
+* Elemento visual tecnológico (gradiente, partículas, grid ou circuito)
+
+---
+
+#### 2. SOBRE A EMPRESA
+
+* Quem é a i2TA
+* Missão, visão e valores
+* Posicionamento estratégico
+
+---
+
+#### 3. SERVIÇOS
+
+* Cards com:
+
+  * Nome do serviço
+  * Descrição clara
+  * Ícone ou elemento visual
+* Hover com destaque e animação
+
+---
+
+#### 4. DIFERENCIAIS
+
+* O que torna a empresa única
+* Abordagem estratégica + tecnológica
+
+---
+
+#### 5. TECNOLOGIA / METODOLOGIA
+
+* Mostrar autoridade técnica
+* Explicar como a empresa atua
+
+---
+
+#### 6. CONTATO
+
+* Formulário funcional (nome, email, mensagem)
+* Botão de envio
+* Informações institucionais
+
+---
+
+#### 7. FOOTER
+
+* Direitos autorais
+* Links rápidos
+* Identidade visual consistente
+
+---
+
+### 💻 REQUISITOS TÉCNICOS
+
+* Utilizar HTML, CSS e JavaScript
+* Código organizado e escalável
+* Separar arquivos:
+
+  * index.html
+  * style.css
+  * script.js
+
+---
+
+### ✨ DETALHES IMPORTANTES
+
+* Aplicar animações com CSS ou JavaScript (sem exagero)
+* Criar experiência visual premium (nível empresa bilionária)
+* Evitar design genérico ou padrão básico
+* Priorizar elegância e clareza
+
+---
+
+### 🔥 RESULTADO ESPERADO
+
+Um site institucional:
+
+* Moderno
+* Tecnológico
+* Visualmente impactante
+* Alinhado com o branding da i2TA
+* Pronto para apresentação profissional ou uso comercial
