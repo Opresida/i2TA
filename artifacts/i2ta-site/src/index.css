@@ -451,6 +451,11 @@
   to { width: var(--target-width); }
 }
 
+@keyframes partners-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
 @keyframes scanline-move {
   0% { background-position: 0 0; }
   100% { background-position: 0 100%; }
