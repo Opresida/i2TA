@@ -89,7 +89,7 @@ export default function About() {
                 }}
               >
                 <img
-                  src="https://i.imgur.com/S85l92Y.png"
+                  src="https://i.imgur.com/bw6rmMQ.png"
                   className="object-contain"
                   style={{
                     height: "60px",

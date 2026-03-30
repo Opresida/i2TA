@@ -47,8 +47,8 @@ export default function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-14">
           <div className="col-span-2 md:col-span-1">
             <img
-              src="https://i.imgur.com/S85l92Y.png"
-              alt="i2TA Logo"
+              src="https://i.imgur.com/bw6rmMQ.png"
+              alt="i2TA - Instituto de Inteligência e Tecnologia Aplicada da Amazônia"
               className="h-10 object-contain mb-5"
             />
             <p className="text-xs md:text-sm leading-relaxed mb-5" style={{ color: "#8A94A6" }}>

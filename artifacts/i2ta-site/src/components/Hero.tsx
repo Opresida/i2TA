@@ -120,7 +120,7 @@ export default function Hero() {
         style={{ zIndex: 10 }}
       >
         <img
-          src="https://i.imgur.com/S85l92Y.png"
+          src="https://i.imgur.com/bw6rmMQ.png"
           alt="i2TA - Instituto de Inteligência e Tecnologia Aplicada da Amazônia"
           className="h-28 md:h-40 lg:h-52 mx-auto mb-10 object-contain"
           style={{
