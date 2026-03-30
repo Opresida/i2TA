@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "i2TA - Instituto de Inteligência e Tecnologia Aplicada"
+version = "1.0.0"
+id = "artifacts/i2ta-site"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 25496
+
+[services.development]
+run = "pnpm --filter @workspace/i2ta-site run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/i2ta-site", "run", "build" ]
+publicDir = "artifacts/i2ta-site/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "25496"
+BASE_PATH = "/"
