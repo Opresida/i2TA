@@ -1,5 +1,5 @@
-import { useState, useEffect, useCallback, useRef } from "react";
-import { Transition } from "@headlessui/react";
+import { useState, useEffect, useCallback } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { Quote } from "lucide-react";
 
 export interface Testimonial {
@@ -36,18 +36,11 @@ export default function TestimonialSlider({
 }: TestimonialSliderProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isAutoRotating, setIsAutoRotating] = useState(true);
-  const [show, setShow] = useState(true);
-  const transitionTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const goTo = useCallback(
     (index: number) => {
       if (index === activeIndex) return;
-      setShow(false);
-      if (transitionTimeout.current) clearTimeout(transitionTimeout.current);
-      transitionTimeout.current = setTimeout(() => {
-        setActiveIndex(index);
-        setShow(true);
-      }, 200);
+      setActiveIndex(index);
     },
     [activeIndex]
   );
@@ -58,20 +51,9 @@ export default function TestimonialSlider({
   };
 
   useEffect(() => {
-    return () => {
-      if (transitionTimeout.current) clearTimeout(transitionTimeout.current);
-    };
-  }, []);
-
-  useEffect(() => {
     if (!isAutoRotating || testimonials.length === 0) return;
     const interval = setInterval(() => {
-      setShow(false);
-      if (transitionTimeout.current) clearTimeout(transitionTimeout.current);
-      transitionTimeout.current = setTimeout(() => {
-        setActiveIndex((prev) => (prev + 1) % testimonials.length);
-        setShow(true);
-      }, 200);
+      setActiveIndex((prev) => (prev + 1) % testimonials.length);
     }, autoRotateInterval);
     return () => clearInterval(interval);
   }, [isAutoRotating, autoRotateInterval, testimonials.length]);
@@ -98,16 +80,15 @@ export default function TestimonialSlider({
           }}
         />
 
-        <Transition
-          show={show}
-          enter="transition-all duration-300 ease-out"
-          enterFrom="opacity-0 translate-y-4"
-          enterTo="opacity-100 translate-y-0"
-          leave="transition-all duration-200 ease-in"
-          leaveFrom="opacity-100 translate-y-0"
-          leaveTo="opacity-0 -translate-y-2"
-        >
-          <div className="relative z-10 flex flex-col gap-6">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeIndex}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
+            className="relative z-10 flex flex-col gap-6"
+          >
             <div
               className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0"
               style={{
@@ -149,8 +130,8 @@ export default function TestimonialSlider({
                 </p>
               </div>
             </div>
-          </div>
-        </Transition>
+          </motion.div>
+        </AnimatePresence>
       </div>
 
       <div className="flex flex-wrap justify-center gap-3 mt-8">
