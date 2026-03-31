@@ -111,9 +111,8 @@ export default function About() {
 
           <div className="reveal reveal-delay-2 relative">
             <div
-              className="relative w-full overflow-hidden rounded-2xl group/container flex items-center justify-center"
+              className="relative w-full overflow-hidden rounded-2xl group/container flex items-center justify-center py-12 md:py-0 min-h-[450px] md:h-[600px]"
               style={{
-                minHeight: "450px",
                 background: "#080B14",
                 border: "1px solid #1A2235",
                 boxShadow: "0 25px 50px -12px rgba(0,0,0,0.5)",

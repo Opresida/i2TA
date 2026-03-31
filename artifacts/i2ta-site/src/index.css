@@ -374,26 +374,29 @@
   }
 }
 
-@keyframes core-pulse {
-  0%, 100% {
-    box-shadow: 0 0 30px rgba(123,63,228,0.3);
-    transform: translate(-50%, -50%) rotate(45deg) scale(1);
-    border-color: rgba(123,63,228,0.5);
-  }
-  50% {
-    box-shadow: 0 0 65px rgba(123,63,228,0.7);
-    transform: translate(-50%, -50%) rotate(45deg) scale(1.06);
-    border-color: rgba(123,63,228,0.9);
-  }
+@keyframes floatCore {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
 }
 
-@keyframes float-node {
-  0%, 100% { transform: rotate(45deg) translateY(0px); }
-  50% { transform: rotate(45deg) translateY(-10px); }
+@keyframes floatNode1 {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-5px, -8px); }
 }
 
-@keyframes data-flow {
-  to { stroke-dashoffset: -24; }
+@keyframes floatNode2 {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(5px, -10px); }
+}
+
+@keyframes floatNode3 {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(0px, 8px); }
+}
+
+@keyframes flow {
+  from { stroke-dashoffset: 24; }
+  to { stroke-dashoffset: 0; }
 }
 
 @keyframes fade-in-up {
@@ -530,12 +533,12 @@
   100% { opacity: 0; }
 }
 
-.anim-core { animation: core-pulse 4s ease-in-out infinite; }
-.anim-node-1 { animation: float-node 5s ease-in-out infinite; }
-.anim-node-2 { animation: float-node 6s ease-in-out infinite 1s; }
-.anim-node-3 { animation: float-node 7s ease-in-out infinite 2s; }
-.anim-flow-fast { stroke-dasharray: 6; animation: data-flow 1.5s linear infinite; }
-.anim-flow-slow { stroke-dasharray: 4 8; animation: data-flow 2.5s linear infinite reverse; }
+.anim-core { animation: floatCore 4s ease-in-out infinite; }
+.anim-node-1 { animation: floatNode1 5s ease-in-out infinite; }
+.anim-node-2 { animation: floatNode2 6s ease-in-out infinite alternate; }
+.anim-node-3 { animation: floatNode3 4.5s ease-in-out infinite; }
+.anim-flow-fast { stroke-dasharray: 6; animation: flow 1s linear infinite; }
+.anim-flow-slow { stroke-dasharray: 4 8; animation: flow 2.5s linear infinite; }
 
 .about-core-node {
   width: 80px; height: 80px;
