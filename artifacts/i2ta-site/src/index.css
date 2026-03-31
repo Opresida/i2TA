@@ -578,7 +578,14 @@
   background: #0B0F1C;
   border-color: rgba(0,224,255,0.5);
 }
-.about-core-logo { height: 32px; }
+.about-core-logo-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(-45deg);
+  transition: transform 0.5s;
+}
+.about-core-logo { display: block; height: 32px; }
 @media (min-width: 480px) { .about-core-logo { height: 42px; } }
 @media (min-width: 768px) { .about-core-logo { height: 56px; } }
 
