@@ -160,11 +160,11 @@ export default function About() {
                       <div className="about-core-spin" />
                     </div>
                     <div className="about-core-inner">
-                      <div style={{ transform: "rotate(-45deg)", transition: "transform 0.5s" }}>
+                      <div style={{ transform: "rotate(-45deg)", transition: "transform 0.5s", display: "flex", alignItems: "center", justifyContent: "center" }}>
                         <img
                           alt="i2TA"
                           src="https://i.imgur.com/bw6rmMQ.png"
-                          style={{ filter: "drop-shadow(0px 0px 15px rgba(123,63,228,0.9))" }}
+                          style={{ filter: "drop-shadow(0px 0px 15px rgba(123,63,228,0.9))", display: "block" }}
                           className="about-core-logo"
                         />
                       </div>
