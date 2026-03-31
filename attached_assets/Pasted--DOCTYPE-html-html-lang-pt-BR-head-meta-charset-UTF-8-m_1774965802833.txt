@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Node Network Component - Evoluído e Alinhado</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        .font-display { font-family: 'Space Grotesk', sans-serif; }
+
+        /* Animações de Flutuação */
+        @keyframes floatCore {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        .anim-core { animation: floatCore 4s ease-in-out infinite; }
+
+        /* Agora a animação atua apenas no Translate, pois a rotação fica na DIV filha */
+        @keyframes floatNode1 {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-5px, -8px); }
+        }
+        @keyframes floatNode2 {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(5px, -10px); }
+        }
+        @keyframes floatNode3 {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(0px, 8px); }
+        }
+
+        .anim-node-1 { animation: floatNode1 5s ease-in-out infinite; }
+        .anim-node-2 { animation: floatNode2 6s ease-in-out infinite alternate; }
+        .anim-node-3 { animation: floatNode3 4.5s ease-in-out infinite; }
+
+        /* Fluxo de dados nas linhas (Marching Ants) */
+        @keyframes flow {
+            from { stroke-dashoffset: 24; }
+            to { stroke-dashoffset: 0; }
+        }
+        .anim-flow-fast { animation: flow 1s linear infinite; }
+        .anim-flow-slow { animation: flow 2.5s linear infinite; }
+
+        body { background-color: #050810; }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+    <!-- Container Principal com Glow e Grid (Ajustado para altura dinâmica no Mobile) -->
+    <div class="relative w-full max-w-3xl min-h-[450px] py-12 md:py-0 md:h-[600px] overflow-hidden rounded-2xl bg-[#080B14] border border-[#1A2235] shadow-2xl group/container flex items-center justify-center">
+        
+        <!-- Background Radial Glow -->
+        <div class="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,rgba(123,63,228,0.12)_0%,rgba(10,15,28,0)_60%)] transition-opacity duration-700 group-hover/container:opacity-100 opacity-60"></div>
+
+        <!-- Background Grid Overlay -->
+        <div class="absolute inset-0 pointer-events-none opacity-20" style="background-image: radial-gradient(rgba(0, 224, 255, 0.4) 1px, transparent 1px); background-size: 30px 30px;"></div>
+
+        <!-- O TRUQUE DO ALINHAMENTO -->
+        <div class="absolute inset-0 flex items-center justify-center p-6 sm:p-8 overflow-hidden">
+            <!-- max-w- dinâmico: Começa menor no mobile, cresce no tablet e chega a 500px no Desktop -->
+            <div class="w-full max-w-[300px] sm:max-w-[400px] md:max-w-[500px] aspect-square relative flex items-center justify-center">
+                
+                <!-- BACKGROUND: SVG das Órbitas -->
+                <svg viewBox="0 0 400 400" class="absolute inset-0 w-full h-full pointer-events-none" style="opacity: 0.35;">
+                    <defs>
+                        <radialGradient id="centerGlow" cx="50%" cy="50%" r="50%">
+                            <stop offset="0%" stop-color="#7B3FE4" stop-opacity="0.4"></stop>
+                            <stop offset="100%" stop-color="#7B3FE4" stop-opacity="0"></stop>
+                        </radialGradient>
+                    </defs>
+                    <!-- Círculos Concêntricos -->
+                    <circle cx="200" cy="200" r="150" fill="none" stroke="rgba(123,63,228,0.15)" stroke-width="1"></circle>
+                    <circle cx="200" cy="200" r="100" fill="none" stroke="rgba(0,224,255,0.1)" stroke-width="1"></circle>
+                    <circle cx="200" cy="200" r="50" fill="url(#centerGlow)"></circle>
+                    
+                    <!-- Linhas Estruturais do Radar -->
+                    <line x1="60" y1="60" x2="340" y2="340" stroke="rgba(123,63,228,0.15)" stroke-width="1"></line>
+                    <line x1="340" y1="60" x2="60" y2="340" stroke="rgba(123,63,228,0.15)" stroke-width="1"></line>
+                    <line x1="200" y1="20" x2="200" y2="380" stroke="rgba(123,63,228,0.1)" stroke-width="1"></line>
+                    <line x1="20" y1="200" x2="380" y2="200" stroke="rgba(123,63,228,0.1)" stroke-width="1"></line>
+                </svg>
+
+                <!-- NÚCLEO CENTRAL INTERATIVO (Tamanhos Responsivos: w-[80px] -> w-[130px]) -->
+                <div class="anim-core relative z-20 flex items-center justify-center group cursor-pointer w-[80px] h-[80px] sm:w-[100px] sm:h-[100px] md:w-[130px] md:h-[130px]">
+                    <!-- Borda Gradiente Giratória -->
+                    <div class="absolute inset-0 rounded-[20px] overflow-hidden opacity-60 group-hover:opacity-100 transition-opacity duration-500">
+                        <div class="absolute inset-[-50%] bg-[conic-gradient(from_0deg,transparent_0deg,#00E0FF_90deg,transparent_180deg,#7B3FE4_270deg,transparent_360deg)] animate-[spin_4s_linear_infinite]"></div>
+                    </div>
+                    <!-- Máscara Interna -->
+                    <div class="absolute inset-[2px] rounded-[18px] border border-[rgba(123,63,228,0.3)] bg-[rgba(10,15,28,0.92)] backdrop-blur-md flex items-center justify-center z-10 transition-all duration-300 group-hover:bg-[#0B0F1C] group-hover:border-[#00E0FF]/50 shadow-[inset_0_0_20px_rgba(123,63,228,0.2)]">
+                        <div class="transform -rotate-45 group-hover:scale-110 transition-transform duration-500 flex items-center justify-center">
+                            <!-- Logo Responsivo -->
+                            <img alt="i2TA" src="https://i.imgur.com/bw6rmMQ.png" class="h-[32px] sm:h-[42px] md:h-[56px] drop-shadow-[0px_0px_15px_rgba(123,63,228,0.9)]">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NODE 1: PD&I (Responsivo de 45px até 70px) -->
+                <div class="absolute z-30 flex items-center justify-center w-0 h-0" style="top: 15%; left: 15%;">
+                    <div class="anim-node-1">
+                        <div class="w-[45px] h-[45px] sm:w-[55px] sm:h-[55px] md:w-[70px] md:h-[70px] rounded-xl border border-[rgba(0,224,255,0.25)] bg-[rgba(10,15,28,0.88)] backdrop-blur-md flex items-center justify-center transform rotate-45 shadow-[0_0_15px_rgba(0,224,255,0.125)] cursor-pointer group hover:scale-125 hover:shadow-[0_0_25px_rgba(0,224,255,0.6)] hover:border-[#00E0FF] hover:bg-[#0B101D] transition-all duration-300">
+                            <span class="font-display font-bold text-[0.45rem] sm:text-[0.5rem] md:text-[0.6rem] text-[#00E0FF] transform -rotate-45 group-hover:text-white transition-colors duration-300 group-hover:drop-shadow-[0_0_8px_#00E0FF]">PD&I</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- NODE 2: AI (Responsivo de 40px até 62px) -->
+                <div class="absolute z-30 flex items-center justify-center w-0 h-0" style="top: 15%; left: 85%;">
+                    <div class="anim-node-3"> 
+                        <div class="w-[40px] h-[40px] sm:w-[50px] sm:h-[50px] md:w-[62px] md:h-[62px] rounded-xl border border-[rgba(123,63,228,0.25)] bg-[rgba(10,15,28,0.88)] backdrop-blur-md flex items-center justify-center transform rotate-45 shadow-[0_0_15px_rgba(123,63,228,0.125)] cursor-pointer group hover:scale-125 hover:shadow-[0_0_25px_rgba(123,63,228,0.6)] hover:border-[#7B3FE4] hover:bg-[#0B101D] transition-all duration-300">
+                            <span class="font-display font-bold text-[0.4rem] sm:text-[0.5rem] md:text-[0.6rem] text-[#7B3FE4] transform -rotate-45 group-hover:text-white transition-colors duration-300 group-hover:drop-shadow-[0_0_8px_#7B3FE4]">AI</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- NODE 3: IoT (Responsivo de 50px até 78px) -->
+                <div class="absolute z-30 flex items-center justify-center w-0 h-0" style="top: 85%; left: 85%;">
+                    <div class="anim-node-2">
+                        <div class="w-[50px] h-[50px] sm:w-[65px] sm:h-[65px] md:w-[78px] md:h-[78px] rounded-xl border border-[rgba(0,224,255,0.25)] bg-[rgba(10,15,28,0.88)] backdrop-blur-md flex items-center justify-center transform rotate-45 shadow-[0_0_15px_rgba(0,224,255,0.125)] cursor-pointer group hover:scale-110 hover:shadow-[0_0_30px_rgba(0,224,255,0.5)] hover:border-[#00E0FF] hover:bg-[#0B101D] transition-all duration-300">
+                            <span class="font-display font-bold text-[0.45rem] sm:text-[0.5rem] md:text-[0.6rem] text-[#00E0FF] transform -rotate-45 group-hover:text-white transition-colors duration-300 group-hover:drop-shadow-[0_0_8px_#00E0FF]">IoT</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- NODE 4: IA (Responsivo de 38px até 60px) -->
+                <div class="absolute z-30 flex items-center justify-center w-0 h-0" style="top: 85%; left: 15%;">
+                    <div class="anim-node-1" style="animation-delay: -2s;"> 
+                        <div class="w-[38px] h-[38px] sm:w-[48px] sm:h-[48px] md:w-[60px] md:h-[60px] rounded-xl border border-[rgba(0,255,156,0.25)] bg-[rgba(10,15,28,0.88)] backdrop-blur-md flex items-center justify-center transform rotate-45 shadow-[0_0_15px_rgba(0,255,156,0.125)] cursor-pointer group hover:scale-125 hover:shadow-[0_0_25px_rgba(0,255,156,0.5)] hover:border-[#00FF9C] hover:bg-[#0B101D] transition-all duration-300">
+                            <span class="font-display font-bold text-[0.4rem] sm:text-[0.5rem] md:text-[0.6rem] text-[#00FF9C] transform -rotate-45 group-hover:text-white transition-colors duration-300 group-hover:drop-shadow-[0_0_8px_#00FF9C]">IA</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FOREGROUND: SVG Linhas de Conexão Animadas (Agora conectam matematicamente do centro 200 até as bordas 60/340) -->
+                <svg class="absolute inset-0 w-full h-full pointer-events-none z-10" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid meet" style="opacity: 0.65;">
+                    <!-- Linha 1: Do Canto Superior Esquerdo ao Centro -->
+                    <path d="M 60 60 L 200 200" stroke="#00E0FF" stroke-width="1.5" fill="none" class="anim-flow-fast" stroke-dasharray="6"></path>
+                    
+                    <!-- Linha 2: Do Canto Superior Direito ao Centro -->
+                    <path d="M 340 60 L 200 200" stroke="#7B3FE4" stroke-width="1.5" fill="none" class="anim-flow-slow" stroke-dasharray="4 8"></path>
+                    
+                    <!-- Linha 3: Do Canto Inferior Direito ao Centro -->
+                    <path d="M 340 340 L 200 200" stroke="#00E0FF" stroke-width="1.5" fill="none" class="anim-flow-fast" stroke-dasharray="6"></path>
+                    
+                    <!-- Linha 4: Do Canto Inferior Esquerdo ao Centro -->
+                    <path d="M 60 340 L 200 200" stroke="#00FF9C" stroke-width="1.5" fill="none" class="anim-flow-slow" stroke-dasharray="4 8"></path>
+                </svg>
+
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

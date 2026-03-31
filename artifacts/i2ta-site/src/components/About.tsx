@@ -111,140 +111,107 @@ export default function About() {
 
           <div className="reveal reveal-delay-2 relative">
             <div
-              className="relative rounded-2xl overflow-hidden"
+              className="relative w-full overflow-hidden rounded-2xl group/container flex items-center justify-center"
               style={{
-                background: "linear-gradient(145deg, rgba(123,63,228,0.08) 0%, rgba(0,224,255,0.04) 100%)",
-                border: "1px solid rgba(123,63,228,0.15)",
-                minHeight: "480px",
+                minHeight: "450px",
+                background: "#080B14",
+                border: "1px solid #1A2235",
+                boxShadow: "0 25px 50px -12px rgba(0,0,0,0.5)",
               }}
             >
-              <div className="scanline-overlay" />
-              <div className="noise-bg" style={{ opacity: 0.05 }} />
+              <div
+                className="absolute inset-0 pointer-events-none transition-opacity duration-700"
+                style={{
+                  background: "radial-gradient(ellipse at center, rgba(123,63,228,0.12) 0%, rgba(10,15,28,0) 60%)",
+                  opacity: 0.6,
+                }}
+              />
 
-              <div className="absolute inset-0 flex items-center justify-center p-8">
-                <div className="w-full h-full relative flex items-center justify-center">
+              <div
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                  backgroundImage: "radial-gradient(rgba(0,224,255,0.4) 1px, transparent 1px)",
+                  backgroundSize: "30px 30px",
+                  opacity: 0.2,
+                }}
+              />
 
-                  <svg viewBox="0 0 400 400" className="absolute inset-0 w-full h-full" style={{ opacity: 0.3 }}>
+              <div className="absolute inset-0 flex items-center justify-center p-6 sm:p-8 overflow-hidden">
+                <div className="w-full relative flex items-center justify-center" style={{ maxWidth: "420px", aspectRatio: "1/1" }}>
+
+                  <svg viewBox="0 0 400 400" className="absolute inset-0 w-full h-full pointer-events-none" style={{ opacity: 0.35 }}>
                     <defs>
-                      <radialGradient id="centerGlow" cx="50%" cy="50%" r="50%">
+                      <radialGradient id="centerGlow2" cx="50%" cy="50%" r="50%">
                         <stop offset="0%" stopColor="#7B3FE4" stopOpacity="0.4" />
                         <stop offset="100%" stopColor="#7B3FE4" stopOpacity="0" />
                       </radialGradient>
                     </defs>
                     <circle cx="200" cy="200" r="150" fill="none" stroke="rgba(123,63,228,0.15)" strokeWidth="1" />
                     <circle cx="200" cy="200" r="100" fill="none" stroke="rgba(0,224,255,0.1)" strokeWidth="1" />
-                    <circle cx="200" cy="200" r="50" fill="url(#centerGlow)" />
-                    {[0, 60, 120, 180, 240, 300].map((deg, i) => {
-                      const rad = (deg * Math.PI) / 180;
-                      const x1 = 200 + 50 * Math.cos(rad);
-                      const y1 = 200 + 50 * Math.sin(rad);
-                      const x2 = 200 + 150 * Math.cos(rad);
-                      const y2 = 200 + 150 * Math.sin(rad);
-                      return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="rgba(123,63,228,0.15)" strokeWidth="1" />;
-                    })}
+                    <circle cx="200" cy="200" r="50" fill="url(#centerGlow2)" />
+                    <line x1="60" y1="60" x2="340" y2="340" stroke="rgba(123,63,228,0.15)" strokeWidth="1" />
+                    <line x1="340" y1="60" x2="60" y2="340" stroke="rgba(123,63,228,0.15)" strokeWidth="1" />
+                    <line x1="200" y1="20" x2="200" y2="380" stroke="rgba(123,63,228,0.1)" strokeWidth="1" />
+                    <line x1="20" y1="200" x2="380" y2="200" stroke="rgba(123,63,228,0.1)" strokeWidth="1" />
                   </svg>
 
-                  <div
-                    className="anim-core relative z-10 flex items-center justify-center"
-                    style={{
-                      width: "120px",
-                      height: "120px",
-                      borderRadius: "18px",
-                      border: "1px solid rgba(123,63,228,0.45)",
-                      background: "rgba(10,15,28,0.92)",
-                      backdropFilter: "blur(10px)",
-                    }}
-                  >
-                    <img
-                      src="https://i.imgur.com/bw6rmMQ.png"
-                      style={{
-                        height: "52px",
-                        transform: "rotate(-45deg)",
-                        filter: "drop-shadow(0 0 12px rgba(123,63,228,0.8))",
-                      }}
-                      alt="i2TA"
-                    />
+                  <div className="anim-core relative z-20 flex items-center justify-center cursor-pointer about-core-node">
+                    <div className="about-core-border">
+                      <div className="about-core-spin" />
+                    </div>
+                    <div className="about-core-inner">
+                      <div style={{ transform: "rotate(-45deg)", transition: "transform 0.5s" }}>
+                        <img
+                          alt="i2TA"
+                          src="https://i.imgur.com/bw6rmMQ.png"
+                          style={{ filter: "drop-shadow(0px 0px 15px rgba(123,63,228,0.9))" }}
+                          className="about-core-logo"
+                        />
+                      </div>
+                    </div>
                   </div>
 
-                  {[
-                    { top: "12%", left: "10%", label: "PD&I", cls: "anim-node-1", color: "#00E0FF", size: 70 },
-                    { top: "65%", left: "72%", label: "IoT", cls: "anim-node-2", color: "#00E0FF", size: 78 },
-                    { top: "20%", left: "74%", label: "AI", cls: "anim-node-3", color: "#7B3FE4", size: 62 },
-                    { top: "68%", left: "10%", label: "IA", cls: "anim-node-1", color: "#00FF9C", size: 60 },
-                  ].map((node, i) => (
-                    <div
-                      key={i}
-                      className={`absolute ${node.cls}`}
-                      style={{
-                        top: node.top, left: node.left,
-                        width: node.size, height: node.size,
-                        borderRadius: "12px",
-                        border: `1px solid ${node.color}40`,
-                        background: "rgba(10,15,28,0.88)",
-                        backdropFilter: "blur(8px)",
-                        display: "flex", alignItems: "center", justifyContent: "center",
-                        transform: "rotate(45deg)",
-                        boxShadow: `0 0 15px ${node.color}20`,
-                      }}
-                    >
-                      <span
-                        className="font-display font-bold"
-                        style={{ fontSize: "0.6rem", color: node.color, transform: "rotate(-45deg)" }}
-                      >
-                        {node.label}
-                      </span>
+                  <div className="absolute z-30 flex items-center justify-center" style={{ top: "15%", left: "15%", width: 0, height: 0 }}>
+                    <div className="anim-node-1">
+                      <div className="about-node about-node-cyan about-node-lg group">
+                        <span className="about-node-label" style={{ color: "#00E0FF" }}>PD&I</span>
+                      </div>
                     </div>
-                  ))}
+                  </div>
 
-                  <svg className="absolute inset-0 w-full h-full" style={{ opacity: 0.5 }} viewBox="0 0 400 400" preserveAspectRatio="xMidYMid meet">
-                    <path d="M 68 80 L 200 200" stroke="#00E0FF" strokeWidth="1.5" fill="none" className="anim-flow-fast" strokeDasharray="6" />
-                    <path d="M 320 88 L 200 200" stroke="#7B3FE4" strokeWidth="1" fill="none" className="anim-flow-slow" strokeDasharray="4 8" />
-                    <path d="M 316 312 L 200 200" stroke="#00E0FF" strokeWidth="1.5" fill="none" className="anim-flow-fast" strokeDasharray="6" />
-                    <path d="M 64 312 L 200 200" stroke="#00FF9C" strokeWidth="1" fill="none" className="anim-flow-slow" strokeDasharray="4 8" />
+                  <div className="absolute z-30 flex items-center justify-center" style={{ top: "15%", left: "85%", width: 0, height: 0 }}>
+                    <div className="anim-node-3">
+                      <div className="about-node about-node-purple about-node-md group">
+                        <span className="about-node-label" style={{ color: "#7B3FE4" }}>AI</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="absolute z-30 flex items-center justify-center" style={{ top: "85%", left: "85%", width: 0, height: 0 }}>
+                    <div className="anim-node-2">
+                      <div className="about-node about-node-cyan about-node-xl group">
+                        <span className="about-node-label" style={{ color: "#00E0FF" }}>IoT</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="absolute z-30 flex items-center justify-center" style={{ top: "85%", left: "15%", width: 0, height: 0 }}>
+                    <div className="anim-node-1" style={{ animationDelay: "-2s" }}>
+                      <div className="about-node about-node-green about-node-sm group">
+                        <span className="about-node-label" style={{ color: "#00FF9C" }}>IA</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <svg className="absolute inset-0 w-full h-full pointer-events-none z-10" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid meet" style={{ opacity: 0.65 }}>
+                    <path d="M 60 60 L 200 200" stroke="#00E0FF" strokeWidth="1.5" fill="none" className="anim-flow-fast" strokeDasharray="6" />
+                    <path d="M 340 60 L 200 200" stroke="#7B3FE4" strokeWidth="1.5" fill="none" className="anim-flow-slow" strokeDasharray="4 8" />
+                    <path d="M 340 340 L 200 200" stroke="#00E0FF" strokeWidth="1.5" fill="none" className="anim-flow-fast" strokeDasharray="6" />
+                    <path d="M 60 340 L 200 200" stroke="#00FF9C" strokeWidth="1.5" fill="none" className="anim-flow-slow" strokeDasharray="4 8" />
                   </svg>
+
                 </div>
               </div>
-
-              <div
-                className="absolute bottom-0 left-0 right-0 p-6"
-                style={{
-                  background: "linear-gradient(0deg, rgba(10,15,28,0.95) 0%, transparent 100%)",
-                }}
-              >
-                <div className="flex flex-wrap gap-2">
-                  {["Indústria 4.0", "IA & ML", "Cloud & IoT", "Amazônia Tech"].map((tag, i) => (
-                    <span
-                      key={i}
-                      className="font-display text-xs font-semibold px-3 py-1 rounded-full"
-                      style={{
-                        border: "1px solid rgba(0,224,255,0.2)",
-                        background: "rgba(0,224,255,0.05)",
-                        color: "#00E0FF",
-                      }}
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            <div
-              className="absolute -top-4 -right-4 w-24 h-24 rounded-2xl flex items-center justify-center border border-glow-pulse"
-              style={{
-                background: "linear-gradient(135deg, rgba(123,63,228,0.15), rgba(0,224,255,0.08))",
-                borderColor: "rgba(0,224,255,0.2)",
-                backdropFilter: "blur(10px)",
-              }}
-            >
-              <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                <circle cx="20" cy="20" r="8" stroke="#00E0FF" strokeWidth="1.5" />
-                <circle cx="20" cy="20" r="14" stroke="rgba(0,224,255,0.3)" strokeWidth="1" />
-                <line x1="20" y1="6" x2="20" y2="2" stroke="#00E0FF" strokeWidth="1.5" />
-                <line x1="20" y1="38" x2="20" y2="34" stroke="#00E0FF" strokeWidth="1.5" />
-                <line x1="6" y1="20" x2="2" y2="20" stroke="#00E0FF" strokeWidth="1.5" />
-                <line x1="38" y1="20" x2="34" y2="20" stroke="#00E0FF" strokeWidth="1.5" />
-              </svg>
             </div>
           </div>
 
