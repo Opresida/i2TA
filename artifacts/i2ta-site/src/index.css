@@ -335,7 +335,7 @@
       padding: 1.5rem 1.25rem;
     }
     .stack-cards-wrapper {
-      min-height: calc(6 * 30vh);
+      min-height: calc(6 * 14vh);
     }
   }
 
