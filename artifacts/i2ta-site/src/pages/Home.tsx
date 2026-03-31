@@ -8,6 +8,7 @@ import Impact from "@/components/Impact";
 import Testimonials from "@/components/Testimonials";
 import Partners from "@/components/Partners";
 import Researchers from "@/components/Researchers";
+import FAQ from "@/components/FAQ";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
@@ -56,6 +57,7 @@ export default function Home() {
       <Testimonials />
       <Partners />
       <Researchers />
+      <FAQ />
       <Contact />
       <Footer />
       <WhatsAppButton />

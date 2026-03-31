@@ -18,6 +18,7 @@ export default function Navbar() {
     { href: "#diferenciais", label: "Diferenciais" },
     { href: "#depoimentos", label: "Depoimentos" },
     { href: "#pesquisadores", label: "Pesquisadores" },
+    { href: "#faq", label: "FAQ" },
     { href: "#contato", label: "Contato" },
   ];
 
