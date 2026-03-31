@@ -5,6 +5,7 @@ import MissionVisionValues from "@/components/MissionVisionValues";
 import Services from "@/components/Services";
 import Differentials from "@/components/Differentials";
 import Impact from "@/components/Impact";
+import NewsCarousel from "@/components/NewsCarousel";
 import Testimonials from "@/components/Testimonials";
 import Partners from "@/components/Partners";
 import Researchers from "@/components/Researchers";
@@ -54,6 +55,7 @@ export default function Home() {
       <Services />
       <Differentials />
       <Impact />
+      <NewsCarousel />
       <Testimonials />
       <Partners />
       <Researchers />
