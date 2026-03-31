@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import NeonMatrixCTA from "./NeonMatrixCTA";
 
 export default function Hero() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -164,9 +165,7 @@ export default function Hero() {
         </p>
 
         <div className="hero-anim hero-anim-d4 flex flex-col sm:flex-row gap-4 w-full sm:w-auto justify-center">
-          <a href="#servicos" className="btn-primary py-3 px-8 rounded-lg text-sm font-display">
-            Nossas Soluções
-          </a>
+          <NeonMatrixCTA href="#contato">Sim, eu quero fazer parte</NeonMatrixCTA>
           <a href="#contato" className="btn-secondary py-3 px-8 rounded-lg text-sm font-display">
             Fale Conosco
           </a>
