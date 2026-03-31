@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon Matrix Button V3</title>
+    <!-- Fonte utilizada no botão original -->
+    <link href="https://fonts.googleapis.com/css2?family=Darker+Grotesque:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Estilos base apenas para centralizar o botão na tela de preview */
+        body {
+            background-color: #0A0A0A;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: sans-serif;
+        }
+
+        /* =========================================
+           CSS EXTRAÍDO DO STYLE.MIN.CSS (ORIGINAL)
+           ========================================= */
+
+        @keyframes borderTurn {
+            0% { transform: rotate(0) }
+            100% { transform: rotate(360deg) }
+        }
+
+        @keyframes borderTurnWithTranslate {
+            0% { transform: translate(-50%, -50%) rotate(0) }
+            100% { transform: translate(-50%, -50%) rotate(360deg) }
+        }
+
+        @keyframes glitchHover {
+            0% { clip-path: inset(0 0 0 0) }
+            20% { clip-path: inset(10% 0 80% 0) }
+            40% { clip-path: inset(40% 0 10% 0) }
+            60% { clip-path: inset(80% 0 5% 0) }
+            80% { clip-path: inset(15% 0 60% 0) }
+            100% { clip-path: inset(0 0 0 0) }
+        }
+
+        .btn-main-v3-link {
+            text-decoration: none !important;
+            color: #fff !important;
+            display: block;
+            width: fit-content;
+            margin: 0 auto;
+        }
+
+        .btn-wrapper-v3 {
+            isolation: isolate;
+            overflow: hidden;
+            border-radius: 4px;
+            position: relative;
+            width: fit-content;
+            margin: auto;
+            --animation-speed: 1.5s;
+            box-shadow: 0 0 15px rgba(255, 102, 0, .2);
+            transition: all .3s cubic-bezier(.25, .46, .45, .94);
+            transform: perspective(600px) rotateX(0);
+        }
+
+        .btn-wrapper-v3:hover {
+            box-shadow: 0 0 30px rgba(255, 102, 0, .6), 0 0 10px rgba(97, 0, 183, .4);
+            transform: perspective(600px) scale(1.03);
+            border-radius: 6px;
+        }
+
+        .btn-wrapper-v3 .animated-border-v3,
+        .btn-wrapper-v3 .mask-layer-1 {
+            left: 50%;
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            z-index: 1;
+        }
+
+        .btn-wrapper-v3 .animated-border-v3:before,
+        .btn-wrapper-v3 .mask-layer-1:before {
+            content: "";
+            float: left;
+            padding-top: 100%;
+        }
+
+        .btn-wrapper-v3 .animated-border-v3:after,
+        .btn-wrapper-v3 .mask-layer-1:after {
+            clear: both;
+            content: "";
+            display: block;
+        }
+
+        .btn-wrapper-v3 .mask-layer-1 {
+            opacity: .8;
+            pointer-events: none;
+            transition: 1s ease opacity;
+        }
+
+        .btn-wrapper-v3 .mask-layer-1 * {
+            height: 100%;
+            left: 0;
+            position: absolute;
+            top: 0;
+            width: 100%;
+        }
+
+        .btn-wrapper-v3 .animated-border-v3,
+        .btn-wrapper-v3 .blur-layer {
+            animation: borderTurn var(--animation-speed) infinite linear;
+            background-image: conic-gradient(from 0 at 50% 50%, #f60 0deg, #6100b7 45deg, rgba(97, 0, 183, 0) 180deg, rgba(255, 102, 0, 0) 315deg, #f60 360deg);
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .btn-wrapper-v3 .blur-layer {
+            filter: blur(12px);
+            opacity: .4;
+        }
+
+        .btn-wrapper-v3 .animated-border-v3 {
+            animation-name: borderTurnWithTranslate;
+        }
+
+        .btn-wrapper-v3 .mask-layer-2 {
+            border-radius: 4px;
+            height: 100%;
+            inset: 0;
+            left: 0;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: xor;
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 1;
+            padding: 2px;
+            pointer-events: none;
+            position: absolute;
+            top: 0;
+            transition: border-radius .3s ease;
+            width: 100%;
+            z-index: 1;
+        }
+
+        .btn-wrapper-v3:hover .mask-layer-2 {
+            border-radius: 6px;
+        }
+
+        .btn-wrapper-v3 .btn-inner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            padding: 4px 28px 4px 4px;
+            background-color: #030712;
+            background: linear-gradient(135deg, rgba(255, 102, 0, .05) 0, #030712 50%, rgba(97, 0, 183, .1) 100%);
+            border-radius: 4px;
+            transition: border-radius .3s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .btn-wrapper-v3:hover .btn-inner {
+            border-radius: 6px;
+            background: linear-gradient(135deg, rgba(255, 102, 0, .15) 0, #030712 50%, rgba(97, 0, 183, .2) 100%);
+        }
+
+        .btn-wrapper-v3 .btn-text {
+            font-family: 'Darker Grotesque', sans-serif;
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(255, 102, 0, .8) 0, rgba(97, 0, 183, .8) 100%);
+            border: 1px solid rgba(255, 255, 255, .3);
+            border-radius: 3px;
+            padding: 12px 22px;
+            color: #fff;
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            overflow: hidden;
+            transition: all .3s ease;
+            box-shadow: inset 0 0 25px rgba(255, 102, 0, .4);
+        }
+
+        .btn-wrapper-v3 .btn-text::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background-image: linear-gradient(rgba(255, 255, 255, .15) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .15) 1px, transparent 1px);
+            background-size: 6px 6px;
+            opacity: .5;
+            z-index: -1;
+            transform: rotate(15deg);
+            transition: opacity .3s ease, transform 1s ease;
+        }
+
+        .btn-wrapper-v3:hover .btn-text {
+            background: linear-gradient(135deg, rgba(255, 102, 0, .95) 0, rgba(97, 0, 183, .95) 100%);
+            border-color: #fff;
+            box-shadow: inset 0 0 30px rgba(255, 102, 0, .6), 0 0 25px rgba(97, 0, 183, .8);
+            text-shadow: 0 0 10px #fff, 0 0 25px #f60;
+            border-radius: 5px;
+        }
+
+        .btn-wrapper-v3:hover .btn-text::before {
+            opacity: .6;
+            transform: rotate(0) scale(1.1);
+        }
+
+        .btn-wrapper-v3 .glitch-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 102, 0, .4);
+            z-index: 4;
+            mix-blend-mode: overlay;
+            pointer-events: none;
+            opacity: 0;
+        }
+
+        .btn-wrapper-v3:hover .glitch-overlay {
+            animation: glitchHover .4s ease-in-out forwards;
+            opacity: 1;
+        }
+
+        .btn-icon-v3 {
+            display: inline-flex;
+            width: 20px;
+            height: 20px;
+            color: #f60;
+            transition: all .3s ease;
+            position: relative;
+            z-index: 3;
+        }
+
+        .btn-wrapper-v3:hover .btn-icon-v3 {
+            color: #6100b7;
+            transform: rotate(45deg);
+            filter: drop-shadow(0 0 5px rgba(97, 0, 183, .8));
+        }
+
+        @media(max-width:480px) {
+            .btn-wrapper-v3 .btn-inner {
+                padding: 4px 20px 4px 4px;
+                gap: 12px;
+            }
+            .btn-wrapper-v3 .btn-text {
+                font-size: 14px;
+                padding: 12px 20px;
+            }
+            .btn-wrapper-v3 .btn-icon-v3 {
+                width: 16px;
+                height: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HTML ORIGINAL DO BOTÃO -->
+    <a href="#" style="text-decoration: none;" class="btn-main-v3-link">
+        <div class="btn-wrapper-v3">
+            <!-- Spinning Gradient Border -->
+            <div class="mask-layer-1">
+                <div class="blur-layer"></div>
+            </div>
+            <div class="mask-layer-2">
+                <div class="animated-border-v3"></div>
+            </div>
+
+            <!-- Glitch effect on hover -->
+            <div class="glitch-overlay"></div>
+
+            <!-- Button Inner Content -->
+            <div class="btn-inner">
+                <div class="btn-text">
+                    Sim, eu quero fazer parte
+                </div>
+
+                <svg class="btn-icon-v3" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </div>
+        </div>
+    </a>
+
+</body>
+</html>
