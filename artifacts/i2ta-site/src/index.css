@@ -303,10 +303,10 @@
   .diff-num {
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 700;
-    font-size: clamp(3rem, 6vw, 5rem);
+    font-size: clamp(2.5rem, 5vw, 4rem);
     line-height: 1;
-    color: rgba(255,255,255,0.06);
-    transition: all 0.4s ease;
+    color: #1A2235;
+    transition: color 0.4s ease, text-shadow 0.4s ease, transform 0.4s ease;
     user-select: none;
   }
   .diff-desc {
@@ -314,6 +314,65 @@
     overflow: hidden;
     opacity: 0;
     transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+  }
+
+  .stack-cards-wrapper {
+    padding-bottom: 10vh;
+  }
+
+  .stack-card {
+    position: sticky;
+    top: calc(100px + var(--idx, 0) * 20px);
+    z-index: var(--idx, 0);
+    background: #0A0E1A;
+    border-radius: 20px;
+    border-top: 2px solid rgba(255, 255, 255, 0.06);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+    padding: 2rem 2rem;
+    transition: border-top-color 0.4s ease;
+    margin-bottom: 15vh;
+  }
+
+  .stack-card:last-child {
+    margin-bottom: 0;
+  }
+
+  .stack-card .diff-num {
+    color: #1A2235;
+    -webkit-text-fill-color: unset;
+    background-image: none;
+    background-clip: unset;
+    -webkit-background-clip: unset;
+  }
+
+  .stack-card.is-stacked .diff-num {
+    color: rgb(var(--accent));
+    text-shadow:
+      0 0 10px rgb(var(--accent)),
+      0 0 30px rgba(var(--accent), 0.5);
+    transform: scale(1.1);
+  }
+
+  .stack-card.is-stacked {
+    border-top-color: rgba(var(--accent), 0.4);
+  }
+
+  .stack-card.diff-item:not(.is-stacked):hover .diff-num {
+    color: #1A2235;
+    -webkit-text-fill-color: unset;
+    background-image: none;
+    background-clip: unset;
+    -webkit-background-clip: unset;
+    text-shadow: none;
+    transform: none;
+  }
+
+  @media (max-width: 768px) {
+    .stack-card {
+      top: calc(80px + var(--idx, 0) * 15px);
+      border-radius: 14px;
+      padding: 1.5rem 1.25rem;
+    }
   }
 
   .service-item {
