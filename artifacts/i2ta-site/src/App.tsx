@@ -5,6 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { AnimatePresence } from "framer-motion";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/Home";
+import Noticias from "@/pages/Noticias";
 import LoadingScreen from "@/components/ui/LoadingScreen";
 import { LoaderContext } from "@/contexts/LoaderContext";
 
@@ -14,6 +15,7 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      <Route path="/noticias" component={Noticias} />
       <Route component={NotFound} />
     </Switch>
   );

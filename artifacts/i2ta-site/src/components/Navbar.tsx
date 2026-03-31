@@ -1,9 +1,13 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
+import { Link, useLocation } from "wouter";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [location] = useLocation();
+
+  const isNoticias = location === "/noticias";
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -11,7 +15,7 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const links = [
+  const anchorLinks = [
     { href: "#sobre", label: "O Instituto" },
     { href: "#cultura", label: "Cultura" },
     { href: "#servicos", label: "Serviços" },
@@ -23,6 +27,9 @@ export default function Navbar() {
   ];
 
   const closeMenu = () => setMenuOpen(false);
+
+  const linkStyle = { color: "#8A94A6" };
+  const linkHoverColor = "#F5F7FA";
 
   return (
     <nav
@@ -38,23 +45,23 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          <a href="#" className="flex-shrink-0 flex items-center">
+          <Link href="/" className="flex-shrink-0 flex items-center">
             <img
               src="https://i.imgur.com/bw6rmMQ.png"
               alt="i2TA - Instituto de Inteligência e Tecnologia Aplicada da Amazônia"
               className="h-10 md:h-12 object-contain transition-all duration-500"
             />
-          </a>
+          </Link>
 
           <div className="hidden lg:flex items-center gap-8">
-            {links.map((link) => (
+            {anchorLinks.map((link) => (
               <a
                 key={link.href}
-                href={link.href}
+                href={isNoticias ? `/${link.href}` : link.href}
                 className="text-sm font-display tracking-wide transition-colors duration-200"
-                style={{ color: "#8A94A6" }}
+                style={linkStyle}
                 onMouseEnter={(e) =>
-                  ((e.target as HTMLElement).style.color = "#F5F7FA")
+                  ((e.target as HTMLElement).style.color = linkHoverColor)
                 }
                 onMouseLeave={(e) =>
                   ((e.target as HTMLElement).style.color = "#8A94A6")
@@ -63,11 +70,26 @@ export default function Navbar() {
                 {link.label}
               </a>
             ))}
+            <Link
+              href="/noticias"
+              className="text-sm font-display tracking-wide transition-colors duration-200"
+              style={{
+                color: isNoticias ? "#00E0FF" : "#8A94A6",
+              }}
+              onMouseEnter={(e) =>
+                ((e.target as HTMLElement).style.color = "#00E0FF")
+              }
+              onMouseLeave={(e) =>
+                ((e.target as HTMLElement).style.color = isNoticias ? "#00E0FF" : "#8A94A6")
+              }
+            >
+              Notícias
+            </Link>
           </div>
 
           <div className="hidden lg:block">
             <a
-              href="#contato"
+              href={isNoticias ? "/#contato" : "#contato"}
               className="btn-primary text-sm py-2.5 px-6 rounded-lg"
             >
               Fale Conosco
@@ -95,10 +117,10 @@ export default function Navbar() {
           }}
         >
           <div className="px-6 py-8 flex flex-col gap-4 text-center">
-            {links.map((link) => (
+            {anchorLinks.map((link) => (
               <a
                 key={link.href}
-                href={link.href}
+                href={isNoticias ? `/${link.href}` : link.href}
                 onClick={closeMenu}
                 className="font-display text-lg tracking-wide border-b pb-3 transition-colors"
                 style={{
@@ -106,7 +128,7 @@ export default function Navbar() {
                   borderColor: "rgba(255,255,255,0.05)",
                 }}
                 onMouseEnter={(e) =>
-                  ((e.target as HTMLElement).style.color = "#F5F7FA")
+                  ((e.target as HTMLElement).style.color = linkHoverColor)
                 }
                 onMouseLeave={(e) =>
                   ((e.target as HTMLElement).style.color = "#8A94A6")
@@ -115,8 +137,19 @@ export default function Navbar() {
                 {link.label}
               </a>
             ))}
+            <Link
+              href="/noticias"
+              onClick={closeMenu}
+              className="font-display text-lg tracking-wide border-b pb-3 transition-colors"
+              style={{
+                color: isNoticias ? "#00E0FF" : "#8A94A6",
+                borderColor: "rgba(255,255,255,0.05)",
+              }}
+            >
+              Notícias
+            </Link>
             <a
-              href="#contato"
+              href={isNoticias ? "/#contato" : "#contato"}
               onClick={closeMenu}
               className="btn-primary w-full mt-4 py-3 rounded-lg"
             >
