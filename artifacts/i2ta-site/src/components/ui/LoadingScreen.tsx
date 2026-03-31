@@ -31,6 +31,7 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
     if (completedRef.current) return;
     completedRef.current = true;
     setFlashing(true);
+    document.body.classList.add("loader-done");
     setTimeout(() => onComplete(), 650);
   }, [onComplete]);
 
@@ -64,6 +65,7 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
       key="loader"
       initial={{ opacity: 1 }}
       animate={flashing ? { opacity: 0 } : { opacity: 1 }}
+      exit={{ opacity: 0, transition: { duration: 0 } }}
       transition={{ duration: 0.6, ease: "easeInOut" }}
       style={{
         position: "fixed",
@@ -76,6 +78,7 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
         justifyContent: "center",
         overflow: "hidden",
         fontFamily: "'Space Grotesk', sans-serif",
+        pointerEvents: flashing ? "none" : "auto",
       }}
     >
       <AnimatedGrid />

@@ -6,6 +6,7 @@ import { AnimatePresence } from "framer-motion";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/Home";
 import LoadingScreen from "@/components/ui/LoadingScreen";
+import { LoaderContext } from "@/contexts/LoaderContext";
 
 const queryClient = new QueryClient();
 
@@ -20,20 +21,24 @@ function Router() {
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
+  const [loaderDone, setLoaderDone] = useState(false);
 
   const handleLoadComplete = useCallback(() => {
     setIsLoading(false);
+    setLoaderDone(true);
   }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <AnimatePresence>
-          {isLoading && <LoadingScreen key="loader" onComplete={handleLoadComplete} />}
-        </AnimatePresence>
-        <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
-          <Router />
-        </WouterRouter>
+        <LoaderContext.Provider value={loaderDone}>
+          <AnimatePresence>
+            {isLoading && <LoadingScreen key="loader" onComplete={handleLoadComplete} />}
+          </AnimatePresence>
+          <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+            <Router />
+          </WouterRouter>
+        </LoaderContext.Provider>
       </TooltipProvider>
     </QueryClientProvider>
   );

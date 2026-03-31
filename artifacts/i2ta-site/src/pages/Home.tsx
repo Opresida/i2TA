@@ -12,8 +12,11 @@ import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { useEffect } from "react";
+import { useLoaderDone } from "@/contexts/LoaderContext";
 
 export default function Home() {
+  const loaderDone = useLoaderDone();
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -26,9 +29,20 @@ export default function Home() {
       { threshold: 0.1 }
     );
 
-    document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+    const elements = document.querySelectorAll(".reveal");
+    elements.forEach((el) => observer.observe(el));
+
+    if (loaderDone) {
+      elements.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          el.classList.add("visible");
+        }
+      });
+    }
+
     return () => observer.disconnect();
-  }, []);
+  }, [loaderDone]);
 
   return (
     <div className="min-h-screen" style={{ background: "#0A0F1C" }}>

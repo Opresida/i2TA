@@ -121,21 +121,17 @@ export default function Hero() {
         <img
           src="https://i.imgur.com/bw6rmMQ.png"
           alt="i2TA - Instituto de Inteligência e Tecnologia Aplicada da Amazônia"
-          className="h-28 md:h-40 lg:h-52 mx-auto mb-10 object-contain"
-          style={{
-            filter: "drop-shadow(0 0 30px rgba(123,63,228,0.5))",
-            animation: "fade-in-up 0.9s ease forwards",
-          }}
+          className="hero-anim h-28 md:h-40 lg:h-52 mx-auto mb-10 object-contain"
+          style={{ filter: "drop-shadow(0 0 30px rgba(123,63,228,0.5))" }}
         />
 
         <div
-          className="inline-flex items-center gap-2 mb-6 px-5 py-2 rounded-full border font-display font-semibold tracking-widest uppercase"
+          className="hero-anim hero-anim-d1 inline-flex items-center gap-2 mb-6 px-5 py-2 rounded-full border font-display font-semibold tracking-widest uppercase"
           style={{
             fontSize: "0.7rem",
             borderColor: "rgba(123,63,228,0.4)",
             background: "rgba(123,63,228,0.1)",
             color: "#00E0FF",
-            animation: "fade-in-up 0.9s 0.15s ease both",
           }}
         >
           <span
@@ -150,11 +146,8 @@ export default function Hero() {
         </div>
 
         <h1
-          className="font-display text-4xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tighter mb-6"
-          style={{
-            color: "#F5F7FA",
-            animation: "fade-in-up 0.9s 0.25s ease both",
-          }}
+          className="hero-anim hero-anim-d2 font-display text-4xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tighter mb-6"
+          style={{ color: "#F5F7FA" }}
         >
           Transformamos{" "}
           <span className="text-gradient">Inteligência</span>
@@ -162,21 +155,15 @@ export default function Hero() {
         </h1>
 
         <p
-          className="text-base md:text-xl mb-10 max-w-2xl mx-auto leading-relaxed font-light"
-          style={{
-            color: "#8A94A6",
-            animation: "fade-in-up 0.9s 0.35s ease both",
-          }}
+          className="hero-anim hero-anim-d3 text-base md:text-xl mb-10 max-w-2xl mx-auto leading-relaxed font-light"
+          style={{ color: "#8A94A6" }}
         >
           O <strong style={{ color: "#F5F7FA" }}>i2TA</strong> é uma ICT dedicada à
           execução de projetos de PD&amp;I com foco em tecnologia aplicada —
           conectando pesquisa, indústria e desenvolvimento sustentável na Amazônia.
         </p>
 
-        <div
-          className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto justify-center"
-          style={{ animation: "fade-in-up 0.9s 0.45s ease both" }}
-        >
+        <div className="hero-anim hero-anim-d4 flex flex-col sm:flex-row gap-4 w-full sm:w-auto justify-center">
           <a href="#servicos" className="btn-primary py-3 px-8 rounded-lg text-sm font-display">
             Nossas Soluções
           </a>

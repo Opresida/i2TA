@@ -19,6 +19,24 @@ const customVariants: Variants = {
   }),
 };
 
+const motionDiv = motion.div;
+const motionSection = motion.section;
+const motionSpan = motion.span;
+const motionP = motion.p;
+const motionH1 = motion.h1;
+const motionH2 = motion.h2;
+const motionH3 = motion.h3;
+
+const motionTagMap: Record<string, typeof motion.div> = {
+  div: motionDiv,
+  section: motionSection,
+  span: motionSpan,
+  p: motionP,
+  h1: motionH1,
+  h2: motionH2,
+  h3: motionH3,
+};
+
 type TimelineContentProps<T extends ElementType = "div"> = {
   as?: T;
   animationNum?: number;
@@ -40,7 +58,7 @@ export function TimelineContent<T extends ElementType = "div">({
   const isInView = useInView(ref, { once, amount: threshold });
 
   const tag = (as ?? "div") as string;
-  const MotionTag = motion.create(tag) as typeof motion.div;
+  const MotionTag = (motionTagMap[tag] ?? motionDiv) as typeof motion.div;
 
   return (
     <MotionTag
