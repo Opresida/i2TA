@@ -77,7 +77,7 @@ export default function Differentials() {
         style={{ width: "600px", height: "600px", background: "#00E0FF", bottom: "-20%", left: "-10%", opacity: 0.04 }}
       />
 
-      <div className="max-w-4xl mx-auto px-6 lg:px-8 relative z-10">
+      <div className="max-w-4xl mx-auto px-6 lg:px-8">
         <div className="text-center mb-16">
           <span className="section-tag">Por que o i2TA</span>
           <h2
@@ -91,62 +91,105 @@ export default function Differentials() {
             O que nos torna únicos no ecossistema de inovação da Amazônia.
           </p>
         </div>
+      </div>
 
-        <div className="stack-cards-wrapper">
-          {diffs.map((d, i) => (
-            <div
-              key={i}
-              ref={(el) => { cardRefs.current[i] = el; }}
-              className="stack-card diff-item"
-              style={
-                {
-                  "--idx": i,
-                  "--accent": d.accent,
-                } as React.CSSProperties
-              }
-            >
-              <div className="flex items-start gap-6 md:gap-10">
-                <div className="flex-shrink-0 leading-none select-none diff-num" aria-hidden>
-                  {d.num}
-                </div>
+      <div className="stack-cards-wrapper px-6 lg:px-8" style={{ maxWidth: "896px", margin: "0 auto" }}>
+        {diffs.map((d, i) => (
+          <div
+            key={i}
+            ref={(el) => { cardRefs.current[i] = el; }}
+            className="stack-card"
+            style={
+              {
+                "--idx": i,
+                "--accent": d.accent,
+              } as React.CSSProperties
+            }
+          >
+            <div className="flex items-start gap-6 md:gap-10">
+              <div className="flex-shrink-0 leading-none select-none diff-num" aria-hidden>
+                {d.num}
+              </div>
 
-                <div className="flex-1 min-w-0 pt-1">
-                  <div className="flex items-center gap-3 mb-2">
-                    <h3
-                      className="font-display font-bold"
-                      style={{ color: "#F5F7FA", fontSize: "clamp(1rem, 2vw, 1.25rem)" }}
-                    >
-                      {d.title}
-                    </h3>
-                  </div>
-                  <p
-                    className="text-sm md:text-base leading-relaxed"
-                    style={{ color: "#8A94A6" }}
+              <div className="flex-1 min-w-0 pt-1">
+                <div className="flex items-center gap-3 mb-2">
+                  <h3
+                    className="font-display font-bold"
+                    style={{ color: "#F5F7FA", fontSize: "clamp(1rem, 2vw, 1.25rem)" }}
                   >
-                    {d.desc}
-                  </p>
+                    {d.title}
+                  </h3>
                 </div>
-
-                <div
-                  className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center mt-1"
-                  style={{
-                    border: `1px solid rgba(${d.accent}, 0.3)`,
-                    color: `rgb(${d.accent})`,
-                  }}
+                <p
+                  className="text-sm md:text-base leading-relaxed"
+                  style={{ color: "#8A94A6" }}
                 >
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                    <path
-                      d="M2 7H12M8 3L12 7L8 11"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </div>
+                  {d.desc}
+                </p>
+              </div>
+
+              <div
+                className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center mt-1"
+                style={{
+                  border: `1px solid rgba(${d.accent}, 0.3)`,
+                  color: `rgb(${d.accent})`,
+                }}
+              >
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path
+                    d="M2 7H12M8 3L12 7L8 11"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
               </div>
             </div>
-          ))}
+          </div>
+        ))}
+      </div>
+
+      <div className="max-w-4xl mx-auto px-6 lg:px-8 mt-2 mb-4">
+        <div
+          className="rounded-2xl px-8 py-12 md:px-14 md:py-14 text-center relative overflow-hidden"
+          style={{
+            background: "linear-gradient(135deg, rgba(123,63,228,0.12) 0%, rgba(0,224,255,0.08) 100%)",
+            border: "1px solid rgba(123,63,228,0.2)",
+          }}
+        >
+          <div
+            className="glow-blob"
+            style={{ width: "300px", height: "300px", background: "#7B3FE4", top: "-30%", right: "-10%", opacity: 0.07 }}
+          />
+          <p
+            className="font-display font-semibold uppercase tracking-widest text-xs mb-4"
+            style={{ color: "#7B3FE4" }}
+          >
+            Vamos construir juntos
+          </p>
+          <h3
+            className="font-display font-bold mb-4"
+            style={{ color: "#F5F7FA", fontSize: "clamp(1.4rem, 3vw, 2rem)" }}
+          >
+            Seu desafio merece uma solução à altura da{" "}
+            <span className="text-gradient">nossa expertise</span>
+          </h3>
+          <p
+            className="text-sm md:text-base max-w-xl mx-auto mb-8 leading-relaxed"
+            style={{ color: "#8A94A6" }}
+          >
+            Conecte sua empresa aos nossos especialistas e descubra como o i2TA transforma desafios reais em resultados mensuráveis — do conceito à entrega.
+          </p>
+          <a
+            href="#contato"
+            className="btn-primary inline-flex items-center gap-2 py-3.5 px-8 rounded-xl text-sm font-display"
+          >
+            Iniciar uma Parceria
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </a>
         </div>
       </div>
     </section>
