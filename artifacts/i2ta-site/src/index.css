@@ -706,6 +706,8 @@ body.loader-done .hero-anim-d4 { animation-delay: 0.56s; }
   border: none;
   outline: none;
   -webkit-tap-highlight-color: transparent;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .nmc-border {
@@ -803,9 +805,17 @@ body.loader-done .hero-anim-d4 { animation-delay: 0.56s; }
 }
 
 @media (max-width: 480px) {
+  .nmc-btn {
+    width: 100%;
+  }
   .nmc-inner {
-    padding: 12px 22px;
-    font-size: 0.9rem;
+    padding: 12px 16px;
+    font-size: 0.85rem;
+    white-space: normal;
+    word-break: break-word;
+    box-sizing: border-box;
+    width: 100%;
+    justify-content: center;
   }
 }
 
