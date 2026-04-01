@@ -47,9 +47,9 @@ export default function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-14">
           <div className="col-span-2 md:col-span-1">
             <img
-              src="https://i.imgur.com/bw6rmMQ.png"
+              src="https://raw.githubusercontent.com/Opresida/2ita-manualdemarca/refs/heads/main/logo.svg"
               alt="i2TA - Instituto de Inteligência e Tecnologia Aplicada da Amazônia"
-              className="h-10 object-contain mb-5"
+              className="h-14 object-contain mb-5"
             />
             <p className="text-xs md:text-sm leading-relaxed mb-5" style={{ color: "#8A94A6" }}>
               Instituto de Inteligência e Tecnologia Aplicada da Amazônia — ICT de
