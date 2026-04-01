@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import NeonMatrixCTA from "./NeonMatrixCTA";
+import LogoGlitch from "./LogoGlitch";
 
 export default function Hero() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -119,10 +120,10 @@ export default function Hero() {
         className="relative text-center max-w-5xl mx-auto px-6 flex flex-col items-center"
         style={{ zIndex: 10 }}
       >
-        <img
+        <LogoGlitch
           src={`${import.meta.env.BASE_URL}logo.svg`}
           alt="i2TA - Instituto de Inteligência e Tecnologia Aplicada da Amazônia"
-          className="hero-anim h-28 md:h-40 lg:h-52 mx-auto mb-10 object-contain"
+          className="hero-anim h-28 md:h-40 lg:h-52 mx-auto mb-10"
           style={{ filter: "drop-shadow(0 0 30px rgba(123,63,228,0.5))" }}
         />
 
