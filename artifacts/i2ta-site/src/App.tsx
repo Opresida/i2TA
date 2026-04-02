@@ -6,6 +6,8 @@ import { AnimatePresence } from "framer-motion";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/Home";
 import Noticias from "@/pages/Noticias";
+import AdminLogin from "@/pages/AdminLogin";
+import AdminDashboard from "@/pages/admin/AdminDashboard";
 import LoadingScreen from "@/components/ui/LoadingScreen";
 import { LoaderContext } from "@/contexts/LoaderContext";
 
@@ -14,6 +16,8 @@ const queryClient = new QueryClient();
 function Router() {
   return (
     <Switch>
+      <Route path="/admin/dashboard" component={AdminDashboard} />
+      <Route path="/admin" component={AdminLogin} />
       <Route path="/" component={Home} />
       <Route path="/noticias" component={Noticias} />
       <Route component={NotFound} />

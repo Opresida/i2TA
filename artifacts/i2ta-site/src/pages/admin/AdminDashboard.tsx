@@ -1,0 +1,231 @@
+import React, { useState } from 'react';
+import {
+  Terminal,
+  Bell,
+  LayoutGrid,
+  Newspaper,
+  PieChart,
+  FolderKanban,
+  Files,
+  Settings,
+  TrendingUp,
+  RefreshCw,
+  Menu,
+} from 'lucide-react';
+
+export default function AdminDashboard() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState('home');
+
+  const menuItems = [
+    { id: 'home', label: 'Home', icon: LayoutGrid },
+    { id: 'imprensa', label: 'Imprensa', icon: Newspaper, href: '/noticias' },
+    { id: 'financeiro', label: 'Financeiro', icon: PieChart },
+    { id: 'projetos', label: 'Projetos', icon: FolderKanban },
+    { id: 'documentos', label: 'Documentos', icon: Files },
+  ];
+
+  return (
+    <div className="h-screen flex flex-col relative overflow-hidden bg-[#0A0F1C] font-sans text-[#8A94A6] selection:bg-[#00E0FF] selection:text-[#0A0F1C]">
+
+      <div
+        className="absolute inset-0 z-0 pointer-events-none opacity-50"
+        style={{
+          backgroundSize: '50px 50px',
+          backgroundImage:
+            'linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px)',
+        }}
+      ></div>
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[40rem] h-[40rem] bg-[#7B3FE4]/20 rounded-full blur-[140px] z-0 pointer-events-none"></div>
+
+      <div className="flex-1 w-full bg-[#0A0F1C] flex flex-col z-10 relative overflow-hidden">
+
+        <div className="h-10 md:h-12 border-b border-white/5 flex items-center justify-between px-3 md:px-4 bg-[#05080f] shrink-0">
+          <div className="flex items-center gap-2">
+            <img
+              src="https://raw.githubusercontent.com/Opresida/2ita-manualdemarca/refs/heads/main/logo.svg"
+              alt="i2TA Logo"
+              className="h-4 md:h-5 opacity-70 object-contain"
+            />
+            <span className="text-[10px] text-gray-600 font-mono hidden sm:inline-block border-l border-white/10 pl-2 ml-1">
+              SYS.DASHBOARD
+            </span>
+          </div>
+
+          <div className="hidden sm:flex flex-1 max-w-xs mx-4 h-6 md:h-7 bg-white/5 rounded items-center px-3 border border-white/5">
+            <Terminal size={12} className="text-[#7B3FE4]" />
+            <span className="text-[9px] md:text-[10px] text-gray-500 ml-2 font-mono">Query database...</span>
+          </div>
+
+          <div className="flex items-center gap-3 md:gap-4">
+            <div className="relative hidden sm:block">
+              <Bell size={18} className="text-gray-400 hover:text-[#F5F7FA] cursor-pointer transition-colors" />
+              <div className="absolute -top-1 -right-1 w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-[#00E0FF] animate-pulse shadow-[0_0_5px_#00E0FF]"></div>
+            </div>
+            <div className="w-6 h-6 md:w-7 md:h-7 rounded-sm bg-[#7B3FE4]/20 flex items-center justify-center text-[9px] md:text-[10px] font-bold text-[#7B3FE4] border border-[#7B3FE4]/30 font-mono">
+              LC
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-1 overflow-hidden relative">
+
+          <div className={`hidden sm:flex flex-col py-4 md:py-6 space-y-2 shrink-0 border-r border-white/5 bg-[#05080f] transition-all duration-300 ease-in-out ${isSidebarOpen ? 'w-56 px-4 items-start' : 'w-12 md:w-16 items-center px-2'}`}>
+
+            <button
+              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+              className={`flex items-center text-gray-500 hover:text-[#F5F7FA] transition-colors mb-4 w-full ${isSidebarOpen ? 'justify-end pr-2' : 'justify-center'}`}
+            >
+              <Menu size={20} />
+            </button>
+
+            {menuItems.map((item) => {
+              const isActive = activeTab === item.id;
+              const Icon = item.icon;
+
+              return (
+                <button
+                  key={item.id}
+                  title={!isSidebarOpen ? item.label : undefined}
+                  onClick={() => {
+                    if (item.href) {
+                      window.location.href = item.href;
+                    } else {
+                      setActiveTab(item.id);
+                    }
+                  }}
+                  className={`flex items-center gap-3 rounded-lg transition-colors overflow-hidden w-full ${
+                    isActive
+                      ? 'bg-[#7B3FE4]/20 text-[#7B3FE4] border border-[#7B3FE4]/30'
+                      : 'text-gray-500 hover:text-[#00E0FF] hover:bg-white/5 border border-transparent'
+                  } ${isSidebarOpen ? 'px-3 py-2.5 justify-start' : 'p-2 justify-center'}`}
+                >
+                  <Icon size={20} className="shrink-0" />
+                  {isSidebarOpen && (
+                    <span className="font-medium font-sans text-sm whitespace-nowrap">
+                      {item.label}
+                    </span>
+                  )}
+                </button>
+              );
+            })}
+
+            <div className="mt-auto w-full pt-4">
+              <button className={`flex items-center gap-3 rounded-lg transition-colors overflow-hidden w-full text-gray-600 hover:text-[#F5F7FA] hover:bg-white/5 border border-transparent ${isSidebarOpen ? 'px-3 py-2.5 justify-start' : 'p-2 justify-center'}`}>
+                <Settings size={20} className="shrink-0" />
+                {isSidebarOpen && <span className="font-medium font-sans text-sm whitespace-nowrap">Configurações</span>}
+              </button>
+            </div>
+          </div>
+
+          <div className="flex-1 p-4 md:p-6 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-[#3B1E7A]/20 via-[#0A0F1C] to-[#0A0F1C] overflow-y-auto">
+
+            {activeTab === 'home' ? (
+              <div className="animate-in fade-in duration-500">
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-4 md:mb-6 gap-3">
+                  <div>
+                    <h4 className="text-[#F5F7FA] font-display font-bold text-base md:text-lg">Network Analytics</h4>
+                    <p className="text-[10px] md:text-xs text-[#00FF9C] font-mono mt-1">Status: System Operational [ON]</p>
+                  </div>
+                  <button className="bg-[#7B3FE4]/20 text-[#F5F7FA] border border-[#7B3FE4]/50 px-2 py-1 md:px-3 md:py-1.5 rounded text-[10px] md:text-xs font-semibold hover:bg-[#7B3FE4]/40 transition-colors w-full sm:w-auto font-mono">
+                    &gt; Deploy Model
+                  </button>
+                </div>
+
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 mb-4 md:mb-6">
+                  <div className="bg-[#05080f] border border-white/10 rounded-lg p-3 md:p-4 relative overflow-hidden group">
+                    <div className="absolute left-0 top-0 w-1 h-full bg-[#7B3FE4]"></div>
+                    <div className="text-gray-500 text-[9px] md:text-[10px] mb-1 font-mono uppercase">Active Nodes</div>
+                    <div className="text-[#F5F7FA] font-display font-bold text-xl md:text-2xl tracking-tight">4,208</div>
+                    <div className="text-[#00FF9C] text-[9px] md:text-[10px] mt-1 md:mt-2 flex items-center gap-1 font-mono">
+                      <TrendingUp size={12} /> +120ms/s
+                    </div>
+                  </div>
+                  <div className="bg-[#05080f] border border-white/10 rounded-lg p-3 md:p-4 relative overflow-hidden group">
+                    <div className="absolute left-0 top-0 w-1 h-full bg-[#00E0FF]"></div>
+                    <div className="text-gray-500 text-[9px] md:text-[10px] mb-1 font-mono uppercase">Data Processed</div>
+                    <div className="text-[#F5F7FA] font-display font-bold text-xl md:text-2xl tracking-tight">854 TB</div>
+                    <div className="text-gray-400 text-[9px] md:text-[10px] mt-1 md:mt-2 flex items-center gap-1 font-mono">
+                      <RefreshCw size={12} /> Syncing...
+                    </div>
+                  </div>
+                  <div className="bg-[#05080f] border border-white/10 rounded-lg p-3 md:p-4 relative overflow-hidden hidden md:block">
+                    <div className="absolute left-0 top-0 w-1 h-full bg-[#0D2A52]"></div>
+                    <div className="text-gray-500 text-[9px] md:text-[10px] mb-1 font-mono uppercase">Server Load</div>
+                    <div className="text-[#F5F7FA] font-display font-bold text-xl mt-1 tracking-tight">24.5%</div>
+                    <div className="w-full h-1 bg-gray-800 rounded mt-2 overflow-hidden">
+                      <div className="w-1/4 h-full bg-[#00E0FF]"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-[#05080f] border border-white/10 rounded-lg p-3 md:p-5 h-32 md:h-44 flex flex-col justify-end relative overflow-hidden">
+                  <div
+                    className="absolute inset-0 opacity-20 pointer-events-none"
+                    style={{
+                      backgroundSize: '50px 50px',
+                      backgroundImage:
+                        'linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px)',
+                    }}
+                  ></div>
+
+                  <div className="flex justify-between items-center absolute top-3 left-4 right-4 md:top-4 md:left-5 md:right-5 z-10">
+                    <span className="text-[10px] md:text-xs text-gray-300 font-mono uppercase">Machine Learning Inference (ms)</span>
+                    <span className="text-[8px] md:text-[10px] text-[#00E0FF] border border-[#00E0FF]/20 px-1.5 py-0.5 md:px-2 md:py-1 rounded bg-[#00E0FF]/10 font-mono">LIVE</span>
+                  </div>
+
+                  <div className="flex items-end justify-between gap-1 md:gap-1.5 h-16 md:h-24 mt-6 md:mt-8 relative z-10">
+                    <div className="w-full bg-[#3B1E7A]/50 rounded-t-sm h-[40%] hover:bg-[#7B3FE4] transition-colors"></div>
+                    <div className="w-full bg-[#3B1E7A]/60 rounded-t-sm h-[55%] hover:bg-[#7B3FE4] transition-colors"></div>
+                    <div className="w-full bg-[#3B1E7A]/50 rounded-t-sm h-[45%] hover:bg-[#7B3FE4] transition-colors"></div>
+                    <div className="w-full bg-[#3B1E7A]/80 rounded-t-sm h-[75%] hover:bg-[#7B3FE4] transition-colors"></div>
+                    <div className="w-full bg-[#00E0FF] rounded-t-sm h-[95%] relative group shadow-[0_0_15px_rgba(0,224,255,0.5)]">
+                      <div className="absolute -top-5 md:-top-7 left-1/2 transform -translate-x-1/2 bg-[#0A0F1C] border border-[#00E0FF] text-[#00E0FF] text-[7px] md:text-[9px] px-1 md:px-1.5 py-0.5 rounded font-mono opacity-0 md:group-hover:opacity-100 transition-opacity">MAX</div>
+                    </div>
+                    <div className="w-full bg-[#3B1E7A]/70 rounded-t-sm h-[65%] hover:bg-[#7B3FE4] transition-colors"></div>
+                    <div className="w-full bg-[#3B1E7A]/60 rounded-t-sm h-[50%] hover:bg-[#7B3FE4] transition-colors"></div>
+                    <div className="w-full bg-[#3B1E7A]/50 rounded-t-sm h-[30%] hover:bg-[#7B3FE4] transition-colors"></div>
+                  </div>
+                  <div className="absolute bottom-0 left-0 w-full h-px bg-[#00E0FF] shadow-[0_0_10px_#00D4FF]"></div>
+                </div>
+              </div>
+            ) : (
+              <div className="flex flex-col items-center justify-center h-full text-center px-4 md:px-8 max-w-lg mx-auto animate-in fade-in zoom-in-95 duration-300">
+                <div className="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-[#00FF9C]/10 border border-[#00FF9C]/30 flex items-center justify-center mb-6 shadow-[0_0_30px_rgba(0,255,156,0.15)]">
+                  <svg fill="#00FF9C" viewBox="0 0 24 24" className="w-8 h-8 md:w-10 md:h-10">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.505-.883-.81-1.479-1.81-1.653-2.107-.173-.298-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51h-.573c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                  </svg>
+                </div>
+
+                <h2 className="text-xl md:text-2xl font-display font-bold text-[#F5F7FA] mb-4">
+                  Módulo em Desenvolvimento
+                </h2>
+                <p className="text-sm md:text-base text-[#8A94A6] mb-8">
+                  Entre em contato com a <strong>Mazari Corp</strong> e solicite o desenvolvimento dessa solução estratégica para a sua operação.
+                </p>
+
+                <a
+                  href="https://wa.me/5516982166580"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 px-6 py-3.5 bg-gradient-to-r from-[#00FF9C] to-[#00E0FF] text-[#0A0F1C] font-bold font-display rounded-lg shadow-[0_0_20px_rgba(0,255,156,0.3)] hover:shadow-[0_0_30px_rgba(0,224,255,0.5)] hover:-translate-y-1 transition-all duration-300 w-full sm:w-auto justify-center"
+                >
+                  <svg fill="currentColor" viewBox="0 0 24 24" width="20" height="20">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.505-.883-.81-1.479-1.81-1.653-2.107-.173-.298-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51h-.573c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                  </svg>
+                  Solicitar Desenvolvimento
+                </a>
+
+                <div className="mt-10 md:mt-12 pt-6 border-t border-white/10 w-full">
+                  <p className="text-[#00E0FF] font-mono uppercase tracking-widest text-[10px] md:text-xs font-bold mb-1.5">www.mazaricorp.com</p>
+                  <p className="text-[10px] md:text-xs text-gray-500 font-sans">Uma Empresa Construída para Resultados Extraordinários</p>
+                </div>
+              </div>
+            )}
+
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
