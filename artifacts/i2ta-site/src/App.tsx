@@ -8,6 +8,7 @@ import Home from "@/pages/Home";
 import Noticias from "@/pages/Noticias";
 import AdminLogin from "@/pages/AdminLogin";
 import AdminDashboard from "@/pages/admin/AdminDashboard";
+import Brandbook from "@/pages/Brandbook";
 import LoadingScreen from "@/components/ui/LoadingScreen";
 import { LoaderContext } from "@/contexts/LoaderContext";
 
@@ -20,6 +21,7 @@ function Router() {
       <Route path="/admin" component={AdminLogin} />
       <Route path="/" component={Home} />
       <Route path="/noticias" component={Noticias} />
+      <Route path="/brandbook" component={Brandbook} />
       <Route component={NotFound} />
     </Switch>
   );
