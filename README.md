@@ -121,7 +121,7 @@ Ambiente isolado para prototipação e visualização de componentes UI. Utiliza
 ### 1. Clone o repositório
 
 ```bash
-git clone https://github.com/seu-usuario/i2ta.git
+git clone https://github.com/Opresida/i2TA.git i2ta
 cd i2ta
 ```
 
@@ -206,6 +206,22 @@ Para publicar o projeto, utilize a funcionalidade de Deploy da Replit a partir d
 
 ---
 
-## Licença
+## Status Atual
 
-Este projeto está licenciado sob a licença **MIT**.
+### Concluido
+- [x] Setup monorepo com pnpm workspaces
+- [x] Site institucional completo (Hero, Sobre, Cultura, Areas, Diferenciais, Contato, Footer)
+- [x] Compatibilidade Windows (binarios nativos + remocao plugins Replit)
+- [x] Secoes de Noticias, Depoimentos e Impactos com placeholder "em breve" (estrutura UI preservada)
+
+### Pendente
+- [ ] Painel administrativo (/admin)
+- [ ] Dados reais: depoimentos de parceiros, numeros de impacto, noticias
+- [ ] Deploy em producao
+- [ ] Formulario de contato funcional (backend)
+
+---
+
+## Licenca
+
+Este projeto esta licenciado sob a licenca **MIT**.
