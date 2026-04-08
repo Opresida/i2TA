@@ -246,6 +246,7 @@
                         <a href="#brandbook" class="text-sm font-display tracking-wide hover:text-i2ta-white transition-colors">Diretrizes</a>
                         <a href="#materiais" class="text-sm font-display tracking-wide hover:text-i2ta-white transition-colors">Aplicações</a>
                         <a href="#conectividade" class="text-sm font-display tracking-wide hover:text-i2ta-white transition-colors">Sistemas</a>
+                        <a href="#assinatura" class="text-sm font-display tracking-wide hover:text-i2ta-white transition-colors">Assinatura</a>
                         <a href="#github" class="text-sm font-display tracking-wide hover:text-i2ta-white transition-colors">Repositórios</a>
                         <a href="#drive" class="text-sm font-display tracking-wide hover:text-i2ta-white transition-colors">Drive</a>
                     </div>
@@ -271,6 +272,7 @@
                 <a href="#materiais" class="mobile-link text-gray-300 hover:text-i2ta-white block text-lg font-display tracking-wide border-b border-white/5 pb-3">Aplicações Visuais</a>
                 <a href="#conectividade" class="mobile-link text-gray-300 hover:text-i2ta-white block text-lg font-display tracking-wide border-b border-white/5 pb-3">Conectividade</a>
                 <a href="#impacto" class="mobile-link text-gray-300 hover:text-i2ta-white block text-lg font-display tracking-wide border-b border-white/5 pb-3">Roadmap</a>
+                <a href="#assinatura" class="mobile-link text-gray-300 hover:text-i2ta-white block text-lg font-display tracking-wide border-b border-white/5 pb-3">Assinatura de E-mail</a>
                 <a href="#github" class="mobile-link text-gray-300 hover:text-i2ta-white block text-lg font-display tracking-wide border-b border-white/5 pb-3">Acesso GitHub</a>
                 <a href="#drive" class="mobile-link text-gray-300 hover:text-i2ta-white block text-lg font-display tracking-wide pb-2">Acesso ao Drive</a>
                 <a href="#drive" class="mobile-link btn-primary w-full mt-6 py-3">Baixar Assets <i class="ph ph-download-simple"></i></a>
@@ -1083,6 +1085,181 @@
             </div>
         </div>
     </section>
+
+    <!-- 7.5 GERADOR DE ASSINATURA DE E-MAIL -->
+    <section id="assinatura" class="py-16 md:py-24 relative overflow-hidden bg-[#05080f] border-t border-white/5">
+        <div class="glow-blob w-[25rem] h-[25rem] bg-i2ta-purple/15 top-10 right-0 transform translate-x-1/3"></div>
+        <div class="bg-grid opacity-10"></div>
+
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+            <div class="mb-12 md:mb-16 text-center gsap-reveal">
+                <span class="text-i2ta-cyan tracking-[0.2em] text-xs md:text-sm uppercase font-bold mb-3 block">Deploy Imediato</span>
+                <h2 class="font-display text-3xl md:text-5xl font-bold text-i2ta-white mb-4 tracking-tight">Gerador de <span class="text-gradient">Assinatura</span></h2>
+                <p class="text-i2ta-neutral-gray max-w-2xl mx-auto text-sm md:text-base">Preencha seus dados e gere o HTML da assinatura pronto para colar no Gmail, Outlook ou qualquer cliente de e-mail.</p>
+            </div>
+
+            <div class="max-w-5xl mx-auto grid lg:grid-cols-2 gap-8">
+                <!-- Formulário -->
+                <div class="glass-card p-6 md:p-8">
+                    <h3 class="font-display font-bold text-i2ta-white text-lg mb-6 flex items-center gap-2">
+                        <i class="ph ph-user-circle text-i2ta-cyan text-xl"></i> Seus Dados
+                    </h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="text-[10px] font-bold uppercase tracking-widest text-i2ta-neutral-gray mb-1.5 block">Nome e Sobrenome *</label>
+                            <input id="sig-nome" type="text" placeholder="Ex: João Silva"
+                                class="w-full bg-white/[0.03] border border-white/10 rounded-lg px-4 py-3 text-sm text-i2ta-white placeholder-gray-600 outline-none focus:border-i2ta-purple/50 focus:shadow-[0_0_0_3px_rgba(123,63,228,0.12)] transition-all"
+                                oninput="atualizarPreview()">
+                        </div>
+                        <div>
+                            <label class="text-[10px] font-bold uppercase tracking-widest text-i2ta-neutral-gray mb-1.5 block">Função / Cargo *</label>
+                            <input id="sig-funcao" type="text" placeholder="Ex: Diretor de Inovação"
+                                class="w-full bg-white/[0.03] border border-white/10 rounded-lg px-4 py-3 text-sm text-i2ta-white placeholder-gray-600 outline-none focus:border-i2ta-purple/50 focus:shadow-[0_0_0_3px_rgba(123,63,228,0.12)] transition-all"
+                                oninput="atualizarPreview()">
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="text-[10px] font-bold uppercase tracking-widest text-i2ta-neutral-gray mb-1.5 block">Telefone</label>
+                                <input id="sig-telefone" type="text" placeholder="(92) 99999-0000"
+                                    class="w-full bg-white/[0.03] border border-white/10 rounded-lg px-4 py-3 text-sm text-i2ta-white placeholder-gray-600 outline-none focus:border-i2ta-purple/50 focus:shadow-[0_0_0_3px_rgba(123,63,228,0.12)] transition-all"
+                                    oninput="atualizarPreview()">
+                            </div>
+                            <div>
+                                <label class="text-[10px] font-bold uppercase tracking-widest text-i2ta-neutral-gray mb-1.5 block">E-mail *</label>
+                                <input id="sig-email" type="email" placeholder="joao@i2ta.org"
+                                    class="w-full bg-white/[0.03] border border-white/10 rounded-lg px-4 py-3 text-sm text-i2ta-white placeholder-gray-600 outline-none focus:border-i2ta-purple/50 focus:shadow-[0_0_0_3px_rgba(123,63,228,0.12)] transition-all"
+                                    oninput="atualizarPreview()">
+                            </div>
+                        </div>
+
+                        <div class="flex gap-3 pt-4">
+                            <button onclick="copiarHTML()" class="btn-primary flex-1 text-sm py-3">
+                                <i class="ph ph-copy"></i> Copiar HTML
+                            </button>
+                            <button onclick="copiarParaGmail()" class="btn-secondary flex-1 text-sm py-3">
+                                <i class="ph ph-envelope-simple"></i> Copiar para Gmail
+                            </button>
+                        </div>
+                        <p id="sig-feedback" class="text-xs text-center text-i2ta-cyan/0 transition-all duration-300 mt-2"></p>
+                    </div>
+                </div>
+
+                <!-- Preview -->
+                <div class="glass-card p-6 md:p-8">
+                    <h3 class="font-display font-bold text-i2ta-white text-lg mb-6 flex items-center gap-2">
+                        <i class="ph ph-eye text-i2ta-purple text-xl"></i> Preview
+                    </h3>
+                    <div class="bg-white rounded-xl p-6 min-h-[200px]" id="sig-preview-container">
+                        <div id="sig-preview">
+                            <!-- Assinatura renderizada aqui -->
+                        </div>
+                    </div>
+                    <div class="mt-4 flex items-center gap-2 text-[10px] text-i2ta-neutral-gray">
+                        <i class="ph ph-info text-sm"></i>
+                        O preview acima mostra exatamente como a assinatura aparecerá no e-mail do destinatário.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Código HTML -->
+            <div class="max-w-5xl mx-auto mt-8">
+                <div class="glass-card p-6 md:p-8">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="font-display font-bold text-i2ta-white text-sm flex items-center gap-2">
+                            <i class="ph ph-code text-i2ta-cyan"></i> Código HTML
+                        </h3>
+                        <button onclick="copiarHTML()" class="text-xs text-i2ta-cyan hover:text-i2ta-white transition-colors flex items-center gap-1">
+                            <i class="ph ph-copy"></i> Copiar
+                        </button>
+                    </div>
+                    <pre id="sig-codigo" class="bg-[#0A0F1C] rounded-xl p-5 text-[11px] text-green-400 overflow-x-auto max-h-60 border border-white/5 font-mono leading-relaxed"></pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function gerarHTMLAssinatura() {
+            const nome = document.getElementById('sig-nome').value || 'Seu Nome';
+            const funcao = document.getElementById('sig-funcao').value || 'Sua Função';
+            const telefone = document.getElementById('sig-telefone').value || '(92) 99999-0000';
+            const email = document.getElementById('sig-email').value || 'email@i2ta.org';
+
+            return `<table cellpadding="0" cellspacing="0" border="0" style="font-family:'Inter',Arial,Helvetica,sans-serif;max-width:480px;">
+  <tr>
+    <td style="padding-right:16px;vertical-align:middle;border-right:2px solid #7B3FE4;">
+      <img src="https://raw.githubusercontent.com/Opresida/2ita-manualdemarca/refs/heads/main/logo.svg" alt="i2TA" width="110" style="display:block;margin:0 auto;" />
+    </td>
+    <td style="padding-left:16px;vertical-align:top;">
+      <p style="margin:0 0 2px 0;font-size:15px;font-weight:700;color:#0A0F1C;font-family:'Space Grotesk','Inter',Arial,sans-serif;">${nome}</p>
+      <p style="margin:0 0 10px 0;font-size:11px;color:#7B3FE4;text-transform:uppercase;letter-spacing:0.08em;font-weight:600;">${funcao}</p>
+      <table cellpadding="0" cellspacing="0" border="0" style="font-size:12px;color:#4B5563;">
+        <tr>
+          <td style="padding:2px 0;">
+            <span style="color:#7B3FE4;font-weight:600;">E:</span> <a href="mailto:${email}" style="color:#4B5563;text-decoration:none;">${email}</a>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:2px 0;">
+            <span style="color:#7B3FE4;font-weight:600;">T:</span> <a href="tel:${telefone.replace(/\D/g,'')}" style="color:#4B5563;text-decoration:none;">${telefone}</a>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:2px 0;">
+            <span style="color:#7B3FE4;font-weight:600;">W:</span> <a href="https://www.i2ta.org" style="color:#7B3FE4;text-decoration:none;font-weight:600;">www.i2ta.org</a>
+          </td>
+        </tr>
+      </table>
+      <p style="margin:10px 0 0 0;font-size:10px;color:#9CA3AF;line-height:1.4;">
+        Instituto de Intelig&ecirc;ncia e Tecnologia Aplicada da Amaz&ocirc;nia<br/>
+        Manaus/AM
+      </p>
+      <p style="margin:8px 0 0 0;padding-top:8px;border-top:1px solid #E5E7EB;font-size:8px;color:#D1D5DB;">
+        Esta mensagem pode conter informa&ccedil;&otilde;es confidenciais. Se voc&ecirc; n&atilde;o for o destinat&aacute;rio, por favor descarte-a.
+      </p>
+    </td>
+  </tr>
+</table>`;
+        }
+
+        function atualizarPreview() {
+            const html = gerarHTMLAssinatura();
+            document.getElementById('sig-preview').innerHTML = html;
+            document.getElementById('sig-codigo').textContent = html;
+        }
+
+        function copiarHTML() {
+            const html = gerarHTMLAssinatura();
+            navigator.clipboard.writeText(html).then(() => {
+                mostrarFeedback('HTML copiado! Cole no editor de assinatura do seu e-mail.');
+            });
+        }
+
+        function copiarParaGmail() {
+            const html = gerarHTMLAssinatura();
+            const container = document.getElementById('sig-preview');
+            const range = document.createRange();
+            range.selectNodeContents(container);
+            const sel = window.getSelection();
+            sel.removeAllRanges();
+            sel.addRange(range);
+            document.execCommand('copy');
+            sel.removeAllRanges();
+            mostrarFeedback('Assinatura copiada com formatação! Abra Gmail → Configurações → Assinatura → Ctrl+V');
+        }
+
+        function mostrarFeedback(msg) {
+            const el = document.getElementById('sig-feedback');
+            el.textContent = msg;
+            el.style.color = '#00E0FF';
+            setTimeout(() => { el.style.color = 'transparent'; }, 3500);
+        }
+
+        // Inicializar preview
+        document.addEventListener('DOMContentLoaded', () => {
+            atualizarPreview();
+        });
+    </script>
 
     <!-- 8. REPOSITÓRIOS GITHUB -->
     <section id="github" class="py-16 md:py-24 relative overflow-hidden bg-[#0A0F1C] border-t border-white/5">
