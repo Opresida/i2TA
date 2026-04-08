@@ -111,7 +111,7 @@ export default function Contact() {
                   {
                     icon: <Phone size={18} />,
                     label: "Atendimento",
-                    value: "+55 (92) 9000-0000",
+                    value: "(92) 98187-0000",
                     color: "#7B3FE4",
                   },
                 ].map((item, i) => (
