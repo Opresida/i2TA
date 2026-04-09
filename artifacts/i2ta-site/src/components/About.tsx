@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 
 const metrics = [
-  { value: 20, suffix: "+", label: "Anos de P&D" },
-  { value: 3, suffix: "", label: "Estados de atuação" },
-  { value: 60, suffix: "+", label: "Parceiros estratégicos" },
-  { value: 100, suffix: "%", label: "Foco em resultados" },
+  { value: 0, suffix: "", label: "Anos de P&D", text: undefined },
+  { value: 1, suffix: "", label: "Estados de atuação", text: undefined },
+  { value: 0, suffix: "", label: "Parceiros estratégicos", text: "Em breve novidades" },
+  { value: 100, suffix: "%", label: "Foco em resultados", text: undefined },
 ];
 
 function AnimatedCounter({ target, suffix, duration = 2000 }: { target: number; suffix: string; duration?: number }) {
@@ -88,6 +88,7 @@ export default function About() {
               entre indústria, tecnologia e desenvolvimento regional sustentável.
             </p>
 
+            {/* Métricas — descomentar quando tiver os números reais
             <div className="grid grid-cols-2 gap-px" style={{ background: "rgba(255,255,255,0.05)", borderRadius: "16px", overflow: "hidden" }}>
               {metrics.map((m, i) => (
                 <div
@@ -106,6 +107,9 @@ export default function About() {
                   </div>
                 </div>
               ))}
+            </div>
+            */}
+            <div className="p-8 rounded-2xl" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.05)", minHeight: "80px" }}>
             </div>
           </div>
 
