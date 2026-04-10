@@ -5,6 +5,18 @@ import { BADGE_PX_W, BADGE_PX_H } from "@/lib/badgeExport";
 interface BadgeBackProps {
   siteUrl?: string;
   showQRCode?: boolean;
+  /** Largura do logo em px (default 220) */
+  logoSize?: number;
+  /** Tamanho da fonte da tagline em px (default 26) */
+  taglineSize?: number;
+  /** Tamanho da fonte da missão em px (default 12) */
+  missionSize?: number;
+  /** Tamanho da fonte da URL em px (default 16) */
+  urlSize?: number;
+  /** Tamanho do QR code em px (default 70) */
+  qrSize?: number;
+  /** Offset vertical do conteúdo central em px (positivo = desce, negativo = sobe; default 0) */
+  contentOffsetY?: number;
 }
 
 /**
@@ -16,7 +28,24 @@ interface BadgeBackProps {
  * missão resumida, link do site, QR code, fundo dark gradient.
  */
 const BadgeBack = forwardRef<HTMLDivElement, BadgeBackProps>(
-  ({ siteUrl = "www.i2ta.org.br", showQRCode = true }, ref) => {
+  (
+    {
+      siteUrl = "www.i2ta.org.br",
+      showQRCode = true,
+      logoSize = 220,
+      taglineSize = 26,
+      missionSize = 12,
+      urlSize = 16,
+      qrSize = 70,
+      contentOffsetY = 0,
+    },
+    ref,
+  ) => {
+    // SVG da tagline: viewBox e posições escalam proporcionalmente ao taglineSize
+    const taglineHeight = Math.round(taglineSize * 4.6);
+    const taglineY1 = Math.round(taglineSize * 1.6);
+    const taglineY2 = Math.round(taglineSize * 3.3);
+
     return (
       <div
         ref={ref}
@@ -102,13 +131,17 @@ const BadgeBack = forwardRef<HTMLDivElement, BadgeBackProps>(
         {/* Conteúdo central */}
         <div
           className="relative z-10 flex flex-col items-center text-center"
-          style={{ paddingTop: 70, paddingLeft: 40, paddingRight: 60 }}
+          style={{
+            paddingTop: 70 + contentOffsetY,
+            paddingLeft: 40,
+            paddingRight: 60,
+          }}
         >
           {/* Logo grande */}
           <img
             src="/brandbook/logo.svg"
             alt="i2TA"
-            style={{ width: 220, height: "auto" }}
+            style={{ width: logoSize, height: "auto" }}
             crossOrigin="anonymous"
           />
 
@@ -121,8 +154,8 @@ const BadgeBack = forwardRef<HTMLDivElement, BadgeBackProps>(
           */}
           <svg
             width="540"
-            height="120"
-            viewBox="0 0 540 120"
+            height={taglineHeight}
+            viewBox={`0 0 540 ${taglineHeight}`}
             xmlns="http://www.w3.org/2000/svg"
             style={{ marginTop: 28, display: "block" }}
           >
@@ -152,9 +185,9 @@ const BadgeBack = forwardRef<HTMLDivElement, BadgeBackProps>(
             {/* Linha 1: "Transformamos Inteligência" */}
             <text
               x="50%"
-              y="42"
+              y={taglineY1}
               fontFamily="'Space Grotesk', sans-serif"
-              fontSize="26"
+              fontSize={taglineSize}
               fontWeight="600"
               fill="#F5F7FA"
               textAnchor="middle"
@@ -171,9 +204,9 @@ const BadgeBack = forwardRef<HTMLDivElement, BadgeBackProps>(
             {/* Linha 2: "em Impacto Real." */}
             <text
               x="50%"
-              y="86"
+              y={taglineY2}
               fontFamily="'Space Grotesk', sans-serif"
-              fontSize="26"
+              fontSize={taglineSize}
               fontWeight="600"
               fill="#F5F7FA"
               textAnchor="middle"
@@ -205,7 +238,7 @@ const BadgeBack = forwardRef<HTMLDivElement, BadgeBackProps>(
           <p
             style={{
               marginTop: 24,
-              fontSize: 12,
+              fontSize: missionSize,
               fontStyle: "italic",
               color: "#B5BFCC",
               lineHeight: 1.55,
@@ -255,7 +288,7 @@ const BadgeBack = forwardRef<HTMLDivElement, BadgeBackProps>(
                   marginTop: 4,
                   fontFamily: "'Space Grotesk', sans-serif",
                   fontWeight: 600,
-                  fontSize: 16,
+                  fontSize: urlSize,
                   color: "#F5F7FA",
                   letterSpacing: "0.02em",
                 }}
@@ -277,7 +310,7 @@ const BadgeBack = forwardRef<HTMLDivElement, BadgeBackProps>(
               >
                 <QRCodeSVG
                   value={`https://${siteUrl.replace(/^https?:\/\//, "")}`}
-                  size={70}
+                  size={qrSize}
                   bgColor="#FFFFFF"
                   fgColor="#0A0F1C"
                   level="M"

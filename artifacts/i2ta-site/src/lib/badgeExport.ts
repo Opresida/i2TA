@@ -1,5 +1,5 @@
 import jsPDF from "jspdf";
-import html2canvas from "html2canvas";
+import { toPng } from "html-to-image";
 
 /**
  * Tamanho do crachá:
@@ -14,9 +14,18 @@ export const BADGE_MM_W = 55.96;
 export const BADGE_MM_H = 88.05;
 
 /**
+ * Renderizador de captura: html-to-image (substituiu html2canvas em 2026-04-10).
+ *
+ * Por que trocou: html2canvas tem bug crônico de "createPattern: canvas with
+ * 0 dimensions" ao processar elementos com background-image gradient (CSS
+ * `linear-gradient`). O crachá usa muitos gradients (foto borda, divider,
+ * footer, glow blobs). html-to-image usa SVG foreignObject ao invés de
+ * canvas direto, e não tem esse bug — suporta CSS modernos com fidelidade.
+ */
+
+/**
  * Garante que as fontes Google (Inter + Space Grotesk) estejam carregadas
- * antes de capturar o DOM. html2canvas não espera fontes por padrão e pode
- * renderizar com font fallback se chamado cedo demais.
+ * antes de capturar o DOM.
  */
 async function waitForFonts() {
   if (typeof document !== "undefined" && (document as any).fonts?.ready) {
@@ -26,35 +35,92 @@ async function waitForFonts() {
       /* ignore */
     }
   }
-  // Aguarda 1 frame de animação pra garantir que tudo foi pintado
+  // Aguarda 2 frames pra garantir que tudo foi pintado
   await new Promise<void>((resolve) =>
     requestAnimationFrame(() => requestAnimationFrame(() => resolve())),
   );
 }
 
 /**
- * Captura um elemento DOM como canvas em alta resolução para impressão.
- *
- * Notas técnicas:
- * - O elemento deve ter tamanho REAL 661×1040 (não escalado por transform).
- *   Use o pattern de off-screen render (position: fixed; left: -10000px) e passe
- *   o ref do elemento off-screen, NÃO de um preview escalado.
- * - `backgroundColor` setado pra cor de fundo do crachá (não null) — null
- *   causa "createPattern with 0 dimensions" em alguns casos.
+ * Aguarda TODAS as imagens descendentes do elemento terminarem de carregar.
  */
-async function captureBadge(element: HTMLElement, scale: number) {
+async function waitForImages(element: HTMLElement): Promise<void> {
+  const imgs = Array.from(element.querySelectorAll("img"));
+  if (imgs.length === 0) return;
+
+  await Promise.all(
+    imgs.map(
+      (img) =>
+        new Promise<void>((resolve) => {
+          if (img.complete && img.naturalWidth > 0 && img.naturalHeight > 0) {
+            resolve();
+            return;
+          }
+          let resolved = false;
+          const done = () => {
+            if (resolved) return;
+            resolved = true;
+            resolve();
+          };
+          img.addEventListener("load", done, { once: true });
+          img.addEventListener("error", done, { once: true });
+          setTimeout(done, 8000);
+        }),
+    ),
+  );
+
+  await new Promise<void>((resolve) =>
+    requestAnimationFrame(() => requestAnimationFrame(() => resolve())),
+  );
+}
+
+/**
+ * Captura um elemento DOM como dataURL PNG em alta resolução para impressão.
+ *
+ * scale=2 → ~1322×2080 (qualidade boa pra PNG individual)
+ * scale=3 → ~1980×3120 (qualidade alta pra PDF impressão)
+ */
+async function captureBadgeAsPng(
+  element: HTMLElement,
+  pixelRatio: number,
+): Promise<string> {
   await waitForFonts();
-  return html2canvas(element, {
+  await waitForImages(element);
+
+  return toPng(element, {
     width: BADGE_PX_W,
     height: BADGE_PX_H,
-    scale,
+    pixelRatio,
+    cacheBust: true,
     backgroundColor: "#0A0F1C",
-    useCORS: true,
-    allowTaint: false,
-    logging: false,
-    foreignObjectRendering: false,
-    windowWidth: BADGE_PX_W,
-    windowHeight: BADGE_PX_H,
+    // canvasWidth/Height força dimensões internas exatas
+    canvasWidth: BADGE_PX_W,
+    canvasHeight: BADGE_PX_H,
+    // Skip de assets externos problemáticos (não temos, mas safety)
+    fetchRequestInit: {
+      cache: "no-cache",
+    },
+    // Filtro: pula elementos potencialmente problemáticos
+    filter: (node) => {
+      // Pula <script> e <style> (não precisamos deles na captura)
+      if (node.nodeType === Node.ELEMENT_NODE) {
+        const tag = (node as Element).tagName?.toLowerCase();
+        if (tag === "script" || tag === "style") return false;
+      }
+      return true;
+    },
+  });
+}
+
+/**
+ * Helper: dataURL → HTMLImageElement (pra usar no jsPDF)
+ */
+function dataUrlToImage(dataUrl: string): Promise<HTMLImageElement> {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => resolve(img);
+    img.onerror = reject;
+    img.src = dataUrl;
   });
 }
 
@@ -65,8 +131,7 @@ export async function exportBadgeAsPNG(
   element: HTMLElement,
   filename: string,
 ): Promise<void> {
-  const canvas = await captureBadge(element, 2);
-  const dataUrl = canvas.toDataURL("image/png");
+  const dataUrl = await captureBadgeAsPng(element, 2);
   const link = document.createElement("a");
   link.href = dataUrl;
   link.download = filename;
@@ -82,10 +147,10 @@ export async function exportBadgePDF(
   backElement: HTMLElement,
   filename: string,
 ): Promise<void> {
-  // scale 3 → ~1980×3120px capturados (qualidade de impressão @ ~900 DPI efetivos)
-  const [frontCanvas, backCanvas] = await Promise.all([
-    captureBadge(frontElement, 3),
-    captureBadge(backElement, 3),
+  // Captura ambos em paralelo, com pixelRatio 3 pra qualidade de impressão
+  const [frontDataUrl, backDataUrl] = await Promise.all([
+    captureBadgeAsPng(frontElement, 3),
+    captureBadgeAsPng(backElement, 3),
   ]);
 
   const pdf = new jsPDF({
@@ -96,7 +161,7 @@ export async function exportBadgePDF(
   });
 
   pdf.addImage(
-    frontCanvas.toDataURL("image/png"),
+    frontDataUrl,
     "PNG",
     0,
     0,
@@ -109,7 +174,7 @@ export async function exportBadgePDF(
   pdf.addPage([BADGE_MM_W, BADGE_MM_H], "portrait");
 
   pdf.addImage(
-    backCanvas.toDataURL("image/png"),
+    backDataUrl,
     "PNG",
     0,
     0,

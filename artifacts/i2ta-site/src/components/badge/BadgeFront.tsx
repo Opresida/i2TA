@@ -5,6 +5,16 @@ interface BadgeFrontProps {
   name: string;
   role: string;
   photoUrl: string | null;
+  /** Largura do logo em px (default 150) */
+  logoSize?: number;
+  /** Tamanho da fonte do nome em px (default 42) */
+  nameSize?: number;
+  /** Tamanho da fonte do cargo em px (default 18) */
+  roleSize?: number;
+  /** Diâmetro da foto circular em px (default 268) */
+  photoSize?: number;
+  /** Offset vertical da foto em px (positivo = desce, negativo = sobe; default 0) */
+  photoOffsetY?: number;
 }
 
 /**
@@ -17,7 +27,19 @@ interface BadgeFrontProps {
  * com glow blobs roxo/ciano e grid tech sutil.
  */
 const BadgeFront = forwardRef<HTMLDivElement, BadgeFrontProps>(
-  ({ name, role, photoUrl }, ref) => {
+  (
+    {
+      name,
+      role,
+      photoUrl,
+      logoSize = 150,
+      nameSize = 42,
+      roleSize = 18,
+      photoSize = 268,
+      photoOffsetY = 0,
+    },
+    ref,
+  ) => {
     return (
       <div
         ref={ref}
@@ -54,15 +76,36 @@ const BadgeFront = forwardRef<HTMLDivElement, BadgeFrontProps>(
           }}
         />
 
-        {/* Grid tech sutil */}
-        <div
+        {/*
+          Grid tech sutil — implementado como SVG inline com <pattern>
+          em vez de background-image gradient. Razão: html2canvas tem bug
+          conhecido com background-image gradient + background-size que
+          causa "createPattern: canvas with 0 dimensions". SVG inline com
+          pattern é serializável e renderiza certinho.
+        */}
+        <svg
           className="absolute inset-0 pointer-events-none"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)",
-            backgroundSize: "50px 50px",
-          }}
-        />
+          width={BADGE_PX_W}
+          height={BADGE_PX_H}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <defs>
+            <pattern
+              id="badge-front-grid"
+              width="50"
+              height="50"
+              patternUnits="userSpaceOnUse"
+            >
+              <path
+                d="M 50 0 L 0 0 0 50"
+                fill="none"
+                stroke="rgba(255,255,255,0.04)"
+                strokeWidth="1"
+              />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#badge-front-grid)" />
+        </svg>
 
         {/* Borda decorativa interna sutil */}
         <div
@@ -83,7 +126,7 @@ const BadgeFront = forwardRef<HTMLDivElement, BadgeFrontProps>(
           <img
             src="/brandbook/logo.svg"
             alt="i2TA"
-            style={{ width: 150, height: "auto" }}
+            style={{ width: logoSize, height: "auto" }}
             crossOrigin="anonymous"
           />
 
@@ -106,9 +149,9 @@ const BadgeFront = forwardRef<HTMLDivElement, BadgeFrontProps>(
           {/* Foto com borda gradient */}
           <div
             style={{
-              marginTop: 56,
-              width: 268,
-              height: 268,
+              marginTop: 56 + photoOffsetY,
+              width: photoSize,
+              height: photoSize,
               borderRadius: "50%",
               padding: 4,
               background: "linear-gradient(135deg, #7B3FE4 0%, #00E0FF 100%)",
@@ -137,7 +180,6 @@ const BadgeFront = forwardRef<HTMLDivElement, BadgeFrontProps>(
                     height: "100%",
                     objectFit: "cover",
                   }}
-                  crossOrigin="anonymous"
                 />
               ) : (
                 <div
@@ -160,7 +202,7 @@ const BadgeFront = forwardRef<HTMLDivElement, BadgeFrontProps>(
               marginTop: 44,
               fontFamily: "'Space Grotesk', sans-serif",
               fontWeight: 700,
-              fontSize: 42,
+              fontSize: nameSize,
               color: "#F5F7FA",
               lineHeight: 1.1,
               maxWidth: "100%",
@@ -174,7 +216,7 @@ const BadgeFront = forwardRef<HTMLDivElement, BadgeFrontProps>(
           <p
             style={{
               marginTop: 12,
-              fontSize: 18,
+              fontSize: roleSize,
               color: "#00E0FF",
               fontWeight: 500,
               lineHeight: 1.3,
