@@ -54,9 +54,9 @@ export default function Home() {
       <MissionVisionValues />
       <Services />
       <Differentials />
-      <Impact />
+      {/* <Impact /> */}
       <NewsCarousel />
-      <Testimonials />
+      {/* <Testimonials /> */}
       <Partners />
       <Researchers />
       <FAQ />
