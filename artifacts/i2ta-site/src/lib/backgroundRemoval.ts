@@ -42,8 +42,12 @@ async function ensureLibLoaded(onProgress?: ProgressCallback): Promise<void> {
 
   onProgress?.("Carregando módulo de remoção de fundo...", null);
 
-  importPromise = import("@imgly/background-removal")
-    .then((mod) => {
+  // Nome do módulo em variável para evitar que Vite import-analysis
+  // tente resolver o pacote em build time (o módulo é carregado sob demanda
+  // em runtime apenas quando o usuário aciona a feature de remoção de fundo).
+  const moduleName = "@imgly/background-removal";
+  importPromise = import(/* @vite-ignore */ moduleName)
+    .then((mod: any) => {
       removeBackgroundFn = mod.removeBackground;
     })
     .catch((err) => {

@@ -121,7 +121,7 @@ A participação permitiu ao i2TA acompanhar tendências globais de ponta e iden
     categoria: "Eventos",
     data: "08 Abr 2026",
     tempoLeitura: 5,
-    imagemUrl: "https://i.imgur.com/kuipxuI.jpeg",
+    imagemUrl: "https://i.imgur.com/Q45glqx.png",
     fotosExtras: [
       { src: "https://i.imgur.com/2lWLrbQ.jpeg", legenda: "Diretor Executivo do i2TA durante o congresso internacional em El Salvador" },
     ],
