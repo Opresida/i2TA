@@ -4,8 +4,10 @@ import { ExternalLink } from "lucide-react";
 interface Researcher {
   name: string;
   title: string;
-  area: string;
+  lattesUrl: string;
   lattesId: string;
+  photo?: string;
+  photoPosition?: string; // CSS object-position (ex: "center 20%")
   avatarColor: string;
   avatarBg: string;
   initials: string;
@@ -13,76 +15,74 @@ interface Researcher {
 
 const researchers: Researcher[] = [
   {
-    name: "Dra. Ana Beatriz Figueiredo",
-    title: "Pesquisadora Sênior em Inteligência Artificial",
-    area: "Aprendizado de Máquina & Visão Computacional",
-    lattesId: "1234567890123456",
+    name: "Mansur Seffair Neto",
+    title: "Presidente",
+    lattesUrl: "http://lattes.cnpq.br/2353004755592011",
+    lattesId: "2353004755592011",
+    photo: "https://i.imgur.com/IPFUbT0.png",
     avatarColor: "#0A0F1C",
     avatarBg: "#00E0FF",
-    initials: "AB",
+    initials: "MS",
   },
   {
-    name: "Dr. Marcos Antônio Leal",
-    title: "Professor Associado e Pesquisador",
-    area: "Processamento de Linguagem Natural",
-    lattesId: "2345678901234567",
+    name: "Leonardo Câmara",
+    title: "Diretor Executivo",
+    lattesUrl: "https://lattes.cnpq.br/1723768307022248",
+    lattesId: "1723768307022248",
+    photo: "https://i.imgur.com/KQfux2U.png",
     avatarColor: "#ffffff",
     avatarBg: "#7B3FE4",
-    initials: "MA",
+    initials: "LC",
   },
   {
-    name: "Dra. Juliana Mendes Costa",
-    title: "Pesquisadora em Ciência de Dados",
-    area: "Análise de Dados Regionais & Bioinformática",
-    lattesId: "3456789012345678",
+    name: "Bruna Ramos",
+    title: "Analista Técnica Jurídica",
+    lattesUrl: "http://lattes.cnpq.br/0849330836132226",
+    lattesId: "0849330836132226",
+    photo: "https://i.imgur.com/8apM09y.png",
     avatarColor: "#0A0F1C",
     avatarBg: "#00E0FF",
-    initials: "JM",
+    initials: "BR",
   },
   {
-    name: "Dr. Rafael Souza Nogueira",
-    title: "Especialista em Sistemas Embarcados",
-    area: "IoT & Computação de Borda para Amazônia",
-    lattesId: "4567890123456789",
+    name: "Romulo Teixeira Rodrigues",
+    title: "Pesquisador Sênior",
+    lattesUrl: "http://lattes.cnpq.br/8415278872311645",
+    lattesId: "8415278872311645",
+    photo: "https://i.imgur.com/xDHw6wv.png",
     avatarColor: "#ffffff",
     avatarBg: "#7B3FE4",
-    initials: "RS",
+    initials: "RR",
   },
   {
-    name: "Profa. Dra. Lúcia Pereira Ramos",
-    title: "Coordenadora de Pesquisa em IA Sustentável",
-    area: "Tecnologia Verde & Eficiência Energética",
-    lattesId: "5678901234567890",
+    name: "Washington Henrique Alves Júnior",
+    title: "Pesquisador Pleno",
+    lattesUrl: "http://lattes.cnpq.br/3560615150646848",
+    lattesId: "3560615150646848",
+    photo: "https://i.imgur.com/cpMALjy.png",
     avatarColor: "#0A0F1C",
     avatarBg: "#00E0FF",
-    initials: "LP",
+    initials: "WA",
   },
   {
-    name: "Dr. Eduardo Tavares Filho",
-    title: "Pesquisador em Segurança Digital",
-    area: "Cibersegurança & Privacidade de Dados",
-    lattesId: "6789012345678901",
+    name: "Tarcila Jessica Silva de Souza",
+    title: "Desenvolvedora Júnior",
+    lattesUrl: "http://lattes.cnpq.br/7158785339385237",
+    lattesId: "7158785339385237",
+    photo: "https://i.imgur.com/E0i69CU.png",
     avatarColor: "#ffffff",
     avatarBg: "#7B3FE4",
-    initials: "ET",
+    initials: "TS",
   },
   {
-    name: "Dra. Camila Braga Viana",
-    title: "Pesquisadora em Saúde Digital",
-    area: "IA Aplicada à Saúde da População Amazônica",
-    lattesId: "7890123456789012",
+    name: "Hélio Endrio Cardoso Rodrigues",
+    title: "Desenvolvedor Júnior",
+    lattesUrl: "http://lattes.cnpq.br/6010950520332268",
+    lattesId: "6010950520332268",
+    photo: "https://i.imgur.com/oVovnDz.png",
     avatarColor: "#0A0F1C",
     avatarBg: "#00E0FF",
-    initials: "CB",
-  },
-  {
-    name: "Dr. Henrique Oliveira Matos",
-    title: "Pesquisador em Computação Quântica",
-    area: "Algoritmos Quânticos & Otimização Combinatória",
-    lattesId: "8901234567890123",
-    avatarColor: "#ffffff",
-    avatarBg: "#7B3FE4",
-    initials: "HO",
+    initials: "HR",
   },
 ];
 
@@ -126,10 +126,10 @@ function ResearcherCard({ researcher }: { researcher: Researcher }) {
     >
       <div
         style={{
-          width: "80px",
-          height: "80px",
+          width: "100px",
+          height: "100px",
           borderRadius: "50%",
-          background: researcher.avatarBg,
+          background: researcher.photo ? "#1a1f2e" : researcher.avatarBg,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -139,19 +139,34 @@ function ResearcherCard({ researcher }: { researcher: Researcher }) {
             : `0 0 0 4px rgba(255,255,255,0.04)`,
           transition: "all 0.4s ease",
           flexShrink: 0,
+          overflow: "hidden",
         }}
       >
-        <span
-          style={{
-            fontFamily: "'Space Grotesk', sans-serif",
-            fontWeight: 700,
-            fontSize: "1.4rem",
-            color: researcher.avatarColor,
-            letterSpacing: "0.04em",
-          }}
-        >
-          {researcher.initials}
-        </span>
+        {researcher.photo ? (
+          <img
+            src={researcher.photo}
+            alt={researcher.name}
+            loading="lazy"
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "center center",
+            }}
+          />
+        ) : (
+          <span
+            style={{
+              fontFamily: "'Space Grotesk', sans-serif",
+              fontWeight: 700,
+              fontSize: "1.4rem",
+              color: researcher.avatarColor,
+              letterSpacing: "0.04em",
+            }}
+          >
+            {researcher.initials}
+          </span>
+        )}
       </div>
 
       <div style={{ textAlign: "center", flex: 1 }}>
@@ -179,18 +194,6 @@ function ResearcherCard({ researcher }: { researcher: Researcher }) {
           }}
         >
           {researcher.title}
-        </p>
-
-        <p
-          style={{
-            fontFamily: "'Inter', sans-serif",
-            fontSize: "0.72rem",
-            color: "#8A94A6",
-            lineHeight: 1.45,
-            marginBottom: "0.85rem",
-          }}
-        >
-          {researcher.area}
         </p>
 
         <div
@@ -232,7 +235,7 @@ function ResearcherCard({ researcher }: { researcher: Researcher }) {
       </div>
 
       <a
-        href={`http://lattes.cnpq.br/${researcher.lattesId}`}
+        href={researcher.lattesUrl}
         target="_blank"
         rel="noopener noreferrer"
         style={{

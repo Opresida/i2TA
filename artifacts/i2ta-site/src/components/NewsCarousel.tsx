@@ -26,11 +26,20 @@ function NewsCard({ noticia }: { noticia: (typeof noticias)[0] }) {
       }}
     >
       <div className="news-card-image-wrapper relative overflow-hidden" style={{ height: "160px" }}>
-        <img
-          src={noticia.imagemUrl}
-          alt={noticia.titulo}
-          className="news-card-image w-full h-full object-cover"
-        />
+        {noticia.semFoto ? (
+          <div
+            className="w-full h-full flex items-center justify-center"
+            style={{ background: `linear-gradient(135deg, ${color}15, rgba(10,15,28,0.95))` }}
+          >
+            <span className="font-display text-4xl font-black select-none" style={{ color: `${color}18` }} aria-hidden="true">i2TA</span>
+          </div>
+        ) : (
+          <img
+            src={noticia.imagemUrl}
+            alt={noticia.titulo}
+            className="news-card-image w-full h-full object-cover"
+          />
+        )}
         <div
           className="absolute inset-0"
           style={{ background: "linear-gradient(to top, rgba(10,15,28,0.7) 0%, transparent 60%)" }}

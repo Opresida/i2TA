@@ -2,156 +2,149 @@ export interface Noticia {
   id: number;
   titulo: string;
   resumo: string;
+  corpo?: string;
   categoria: string;
   data: string;
   tempoLeitura: number;
   imagemUrl: string;
+  semFoto?: boolean;
+  fotosExtras?: { src: string; legenda?: string }[];
 }
 
 export const CATEGORIAS = [
   "Todos",
-  "PD&I",
-  "IA Aplicada",
-  "Saúde Digital",
-  "Formação",
-  "Transferência de Tecnologia",
-  "Geral",
+  "Parcerias",
+  "Eventos",
+  "Credenciamento",
+  "Impacto Social",
 ];
 
 export const noticias: Noticia[] = [
   {
     id: 1,
-    titulo: "i2TA lança plataforma de IA para diagnóstico precoce de doenças tropicais na Amazônia",
-    resumo: "Em parceria com hospitais regionais, o instituto desenvolve solução de visão computacional capaz de identificar padrões de malária e leishmaniose com 94% de acurácia a partir de imagens microscópicas.",
-    categoria: "IA Aplicada",
-    data: "28 Mar 2026",
-    tempoLeitura: 6,
-    imagemUrl: "https://images.unsplash.com/photo-1576086213369-97a306d36557?w=800&q=80",
+    titulo:
+      "i2TA firma Termo de Cooperação Técnica com a Universidade do Estado do Amazonas",
+    resumo:
+      "Parceria estratégica entre o instituto e a UEA abre caminho para projetos conjuntos de PD&I, formação de pesquisadores e soluções tecnológicas voltadas à Amazônia.",
+    corpo: `O Instituto de Inteligência e Tecnologia Aplicada da Amazônia — i2TA — celebrou a assinatura de Termo de Cooperação Técnica com a Universidade do Estado do Amazonas (UEA), representada por seu reitor, André Zogahib.
+
+O acordo estabelece as bases para o desenvolvimento conjunto de projetos de Pesquisa, Desenvolvimento e Inovação (PD&I), com ênfase em soluções que atendam às demandas específicas da região amazônica — de inteligência artificial aplicada à biodiversidade até sistemas de saúde digital para comunidades ribeirinhas.
+
+A cooperação prevê, ainda, a formação de recursos humanos qualificados: pesquisadores, bolsistas e profissionais de tecnologia terão acesso a programas de capacitação integrados entre o i2TA e os laboratórios da UEA.
+
+"Unir a expertise acadêmica da UEA com a vocação de inovação aplicada do i2TA é criar um corredor de transferência de conhecimento que beneficia diretamente o Amazonas", afirmou Mansur Seffair Neto, Presidente do i2TA.
+
+A iniciativa fortalece a integração entre academia e setor produtivo, posicionando ambas as instituições na vanguarda do desenvolvimento tecnológico regional.`,
+    categoria: "Parcerias",
+    data: "10 Abr 2026",
+    tempoLeitura: 4,
+    imagemUrl: "https://i.imgur.com/hniQe3b.png",
   },
   {
     id: 2,
-    titulo: "Instituto conclui primeira fase do programa de Residência em Tecnologia para pesquisadores amazônicos",
-    resumo: "Vinte e dois pesquisadores de cinco estados concluíram a primeira turma do programa intensivo de formação em PD&I aplicada, com foco em soluções para o bioma amazônico.",
-    categoria: "Formação",
-    data: "21 Mar 2026",
+    titulo:
+      "i2TA estabelece cooperação com o CETELI/UFAM para desenvolvimento tecnológico de fronteira",
+    resumo:
+      "A formalização com o CETELI, por meio do professor Kenny Vinente, conecta pesquisa acadêmica de alto nível a aplicações práticas em IA, sistemas embarcados e automação industrial.",
+    corpo: `O i2TA formalizou cooperação técnica com o Centro de Tecnologia Eletrônica e da Informação (CETELI) da Universidade Federal do Amazonas (UFAM), por meio do professor Dr. Kenny Vinente, coordenador do centro.
+
+O CETELI é referência nacional em pesquisa aplicada a sistemas embarcados, microeletrônica e automação — áreas estratégicas que se alinham diretamente com a agenda de inovação do i2TA.
+
+A parceria prevê o desenvolvimento conjunto de projetos em inteligência artificial, Internet das Coisas (IoT) industrial e automação de processos, com potencial de transferência tecnológica para o polo industrial de Manaus e para setores como saúde, logística e monitoramento ambiental.
+
+"A integração do conhecimento de fronteira do CETELI com a agilidade de execução do i2TA cria um ecossistema de P&D&I diferenciado, capaz de transformar papers em produtos", destacou Leonardo Câmara, Diretor Executivo do i2TA.
+
+Com essa iniciativa, o i2TA amplia sua capacidade técnica e consolida sua atuação como Instituição Científica e Tecnológica (ICT) voltada à inovação aplicada no coração da Amazônia.`,
+    categoria: "Parcerias",
+    data: "02 Abr 2026",
     tempoLeitura: 5,
-    imagemUrl: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80",
+    imagemUrl:
+      "https://i.imgur.com/uYn73dG.jpeg",
   },
   {
     id: 3,
-    titulo: "Novo projeto de PD&I mapeia espécies endêmicas com drones e inteligência artificial",
-    resumo: "O projeto AmazôniaBio combina sensoriamento remoto, modelos de linguagem e análise geoespacial para catalogar a biodiversidade de áreas de difícil acesso no interior do Pará.",
-    categoria: "PD&I",
-    data: "15 Mar 2026",
-    tempoLeitura: 7,
-    imagemUrl: "https://images.unsplash.com/photo-1485628390555-1a7bd503f9fe?w=800&q=80",
+    titulo:
+      "i2TA inicia processo de credenciamento junto ao CAPDA para captação de recursos via Lei de Informática",
+    resumo:
+      "O instituto dá passo estratégico rumo à certificação que habilitará a execução de projetos de PD&I com recursos provenientes dos incentivos fiscais da Zona Franca de Manaus.",
+    corpo: `O Instituto de Inteligência e Tecnologia Aplicada da Amazônia — i2TA — deu início ao processo formal de credenciamento junto ao Comitê das Atividades de Pesquisa e Desenvolvimento na Amazônia (CAPDA).
+
+A certificação pelo CAPDA é requisito fundamental para que uma ICT possa atuar como executora de projetos de Pesquisa, Desenvolvimento e Inovação (PD&I) financiados pela Lei de Informática (Lei nº 8.387/1991) — mecanismo de incentivo fiscal que sustenta o ecossistema de inovação da Zona Franca de Manaus.
+
+O processo de credenciamento envolve três frentes simultâneas: a estruturação institucional completa (governança, compliance, infraestrutura laboratorial), a consolidação de uma equipe técnica qualificada com titulação e produção científica compatíveis, e a construção de um portfólio de projetos alinhados às demandas da indústria local e às vocações da Amazônia.
+
+"A certificação CAPDA não é apenas um selo — é a chave que conecta o i2TA ao motor econômico do polo industrial de Manaus. É com ela que transformamos potencial científico em impacto concreto", afirmou Mansur Seffair Neto, Presidente do i2TA.
+
+A conclusão do processo está prevista para o segundo semestre de 2026.`,
+    categoria: "Credenciamento",
+    data: "25 Mar 2026",
+    tempoLeitura: 5,
+    imagemUrl:
+      "https://i.imgur.com/WWTgGMT.png",
   },
   {
     id: 4,
-    titulo: "i2TA assina acordo de transferência de tecnologia com consórcio de municípios do AM",
-    resumo: "Acordo prevê implementação de sistema de gestão pública baseado em IA para otimizar serviços de saúde, educação e infraestrutura em 14 municípios do interior do Amazonas.",
-    categoria: "Transferência de Tecnologia",
-    data: "10 Mar 2026",
+    titulo:
+      "Diretor Executivo do i2TA participa da Brasil Tech 2026 e fortalece posicionamento nacional",
+    resumo:
+      "Leonardo Câmara representou o instituto no principal encontro de tecnologia e inovação do país, realizado em São Paulo, conectando o i2TA às tendências e lideranças do ecossistema nacional.",
+    corpo: `O Diretor Executivo do i2TA, Leonardo Câmara, participou da Brasil Tech 2026, realizada no dia 13 de abril, em São Paulo — um dos principais eventos do calendário nacional de tecnologia e inovação.
+
+A Brasil Tech reuniu lideranças de governo, indústria, startups e centros de pesquisa para debater os caminhos da transformação digital brasileira. Painéis sobre inteligência artificial generativa, infraestrutura de dados soberanos e o papel dos incentivos fiscais na pesquisa foram alguns dos destaques da programação.
+
+"Participar da Brasil Tech é posicionar o i2TA — e a Amazônia — no radar de quem decide os rumos da inovação no país. Não viemos apenas ouvir: trouxemos cases, trouxemos demandas, trouxemos a perspectiva de quem inova a partir da floresta", declarou Leonardo Câmara.
+
+O evento proporcionou um ambiente privilegiado para troca de experiências, identificação de tendências emergentes e fortalecimento de conexões estratégicas com potenciais parceiros, investidores e formuladores de política pública.
+
+A participação reafirma o compromisso do i2TA com a atualização contínua e a integração com o ecossistema tecnológico brasileiro.`,
+    categoria: "Eventos",
+    data: "14 Abr 2026",
     tempoLeitura: 4,
-    imagemUrl: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80",
+    imagemUrl:
+      "https://i.imgur.com/tJBl7v9.png",
   },
   {
     id: 5,
-    titulo: "Telemedicina integrada: instituto apresenta resultados do piloto em comunidades ribeirinhas",
-    resumo: "Após seis meses de operação, o sistema de triagem remota via aplicativo reduziu em 38% as transferências desnecessárias para centros urbanos, impactando mais de 3.200 pacientes.",
-    categoria: "Saúde Digital",
-    data: "05 Mar 2026",
+    titulo:
+      "i2TA participa de congresso internacional em El Salvador com foco em segurança e inovação digital",
+    resumo:
+      "A presença no evento global permitiu ao instituto mapear tendências em inteligência de dados, sistemas digitais e modernização de segurança pública — com aplicações diretas para o Brasil.",
+    corpo: `O Diretor Executivo do i2TA, Leonardo Câmara, participou de congresso internacional realizado em El Salvador, voltado à interseção entre segurança pública e inovação tecnológica.
+
+O evento reuniu delegações de mais de 30 países para debater o uso de tecnologias avançadas — inteligência artificial, análise preditiva, reconhecimento de padrões e plataformas integradas de dados — no apoio à tomada de decisão e na modernização de estruturas de segurança pública.
+
+El Salvador, que se tornou referência mundial na aplicação de tecnologia para transformação de políticas de segurança, serviu como case vivo durante o congresso, com visitas técnicas a centros de comando e controle.
+
+"O que vimos em El Salvador é a prova de que tecnologia, quando aplicada com estratégia e ética, pode transformar realidades inteiras. Trouxemos insights concretos sobre como adaptar essas soluções ao contexto brasileiro e amazônico", afirmou Leonardo Câmara.
+
+A participação permitiu ao i2TA acompanhar tendências globais de ponta e identificar oportunidades imediatas de aplicação no contexto nacional, especialmente na integração entre big data, inteligência artificial e sistemas de gestão pública.`,
+    categoria: "Eventos",
+    data: "08 Abr 2026",
     tempoLeitura: 5,
-    imagemUrl: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&q=80",
+    imagemUrl: "https://i.imgur.com/kuipxuI.jpeg",
+    fotosExtras: [
+      { src: "https://i.imgur.com/2lWLrbQ.jpeg", legenda: "Diretor Executivo do i2TA durante o congresso internacional em El Salvador" },
+    ],
   },
   {
     id: 6,
-    titulo: "Workshop de NLP em português amazônico reúne 80 pesquisadores em Belém",
-    resumo: "O evento discutiu os desafios de construir modelos de linguagem que compreendam expressões regionais, dialetos e vocabulário técnico específicos da Amazônia brasileira.",
-    categoria: "IA Aplicada",
-    data: "28 Fev 2026",
-    tempoLeitura: 4,
-    imagemUrl: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80",
-  },
-  {
-    id: 7,
-    titulo: "Edital de fomento à pesquisa aplicada abre 30 vagas para projetos em tecnologia sustentável",
-    resumo: "O programa oferece bolsas de até R$ 120 mil para projetos de 12 meses com potencial de impacto direto em comunidades tradicionais e preservação ambiental na região Norte.",
-    categoria: "PD&I",
-    data: "20 Fev 2026",
-    tempoLeitura: 3,
-    imagemUrl: "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800&q=80",
-  },
-  {
-    id: 8,
-    titulo: "i2TA publica relatório anual de impacto: 47 projetos ativos em 8 estados",
-    resumo: "O relatório de 2025 documenta o crescimento do instituto, com destaque para os indicadores de transferência de tecnologia, publicações científicas e parcerias estratégicas firmadas ao longo do ano.",
-    categoria: "Geral",
-    data: "12 Fev 2026",
-    tempoLeitura: 6,
-    imagemUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
-  },
-  {
-    id: 9,
-    titulo: "Formação em Ciência de Dados para servidores públicos da saúde inicia segunda turma",
-    resumo: "O programa de capacitação em parceria com secretarias estaduais já formou 65 servidores na primeira turma e abre novas vagas com foco em análise de dados epidemiológicos.",
-    categoria: "Formação",
-    data: "05 Fev 2026",
-    tempoLeitura: 4,
-    imagemUrl: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&q=80",
-  },
-  {
-    id: 10,
-    titulo: "Parceria com startup amazônica acelera desenvolvimento de wearable para monitoramento de trabalhadores rurais",
-    resumo: "O dispositivo IoT desenvolvido em conjunto monitora temperatura corporal, exposição solar e hidratação, enviando alertas em tempo real para bases de apoio no campo.",
-    categoria: "Transferência de Tecnologia",
-    data: "28 Jan 2026",
+    titulo:
+      "i2TA firma parceria com o CVI Amazonas e leva tecnologia para a reabilitação de pessoas com deficiência",
+    resumo:
+      "A cooperação com o Centro de Vida Independente do Amazonas une inovação tecnológica e impacto social direto — ampliando o acesso a serviços de saúde e inclusão para quem mais precisa.",
+    corpo: `O i2TA formalizou parceria estratégica com o CVI Amazonas — Centro de Vida Independente do Amazonas —, instituição reconhecida pelo Ministério da Saúde como Centro Especializado em Reabilitação (CER III) e referência estadual em reabilitação biopsicossocial.
+
+O CVI atende mais de 50 municípios com atendimento 100% gratuito pelo SUS, oferecendo fisioterapia, terapia ocupacional, fonoaudiologia, psicologia, serviço social e neurologia — impactando diretamente a vida de milhares de pessoas com deficiência, seus familiares e cuidadores.
+
+A cooperação entre as duas instituições tem como objetivo o desenvolvimento de soluções tecnológicas aplicadas à saúde: desde plataformas de gestão de atendimentos até ferramentas de telemedicina para comunidades ribeirinhas, passando por sistemas de monitoramento remoto de pacientes e automação de processos assistenciais.
+
+"O CVI representa o que há de mais humano no serviço público brasileiro. Levar tecnologia para dentro dessa operação é multiplicar cada sessão de fisioterapia, cada atendimento psicológico, cada momento de acolhimento", afirmou Mansur Seffair Neto, Presidente do i2TA.
+
+A iniciativa reforça o posicionamento do i2TA como uma ICT que não mede impacto apenas por papers publicados ou patentes registradas — mas por vidas transformadas.`,
+    categoria: "Impacto Social",
+    data: "01 Abr 2026",
     tempoLeitura: 5,
-    imagemUrl: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=800&q=80",
-  },
-  {
-    id: 11,
-    titulo: "Prontuário eletrônico adaptado para populações indígenas é premiado em conferência nacional",
-    resumo: "O sistema, desenvolvido com participação de lideranças indígenas e profissionais de saúde, incorpora marcadores culturais e suporte multilíngue para 12 línguas da Amazônia.",
-    categoria: "Saúde Digital",
-    data: "20 Jan 2026",
-    tempoLeitura: 5,
-    imagemUrl: "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=800&q=80",
-  },
-  {
-    id: 12,
-    titulo: "i2TA integra rede internacional de ICTs focadas em tecnologia climática",
-    resumo: "O instituto passa a fazer parte do Climate Tech Institute Network, colaboração entre 23 instituições de 11 países comprometidas com soluções tecnológicas para as mudanças climáticas.",
-    categoria: "Geral",
-    data: "10 Jan 2026",
-    tempoLeitura: 4,
-    imagemUrl: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80",
-  },
-  {
-    id: 13,
-    titulo: "Pesquisadores do i2TA apresentam modelo preditivo de desmatamento no SIBGRAPI 2026",
-    resumo: "O modelo combina imagens de satélite Sentinel-2, dados socioeconômicos e redes neurais convolucionais para prever pontos de pressão no desmatamento com 90 dias de antecedência.",
-    categoria: "PD&I",
-    data: "02 Jan 2026",
-    tempoLeitura: 7,
-    imagemUrl: "https://images.unsplash.com/photo-1446776877081-d282a0f896e2?w=800&q=80",
-  },
-  {
-    id: 14,
-    titulo: "Bootcamp de IA Generativa forma primeira turma com foco em aplicações regionais",
-    resumo: "O programa intensivo de 120 horas capacitou 34 profissionais de tecnologia da região Norte em técnicas de fine-tuning, RAG e deployment de modelos de linguagem de grande escala.",
-    categoria: "Formação",
-    data: "20 Dez 2025",
-    tempoLeitura: 4,
-    imagemUrl: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=800&q=80",
-  },
-  {
-    id: 15,
-    titulo: "i2TA conclui mapeamento de gargalos tecnológicos em 6 cadeias produtivas da Amazônia",
-    resumo: "O estudo de 18 meses identificou 124 oportunidades de aplicação de tecnologia digital nas cadeias do açaí, pesca, castanha, madeira certificada, turismo e pecuária sustentável.",
-    categoria: "Transferência de Tecnologia",
-    data: "10 Dez 2025",
-    tempoLeitura: 6,
-    imagemUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80",
+    imagemUrl:
+      "https://i.imgur.com/3fASqIu.png",
   },
 ];
