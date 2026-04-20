@@ -43,10 +43,10 @@ A iniciativa fortalece a integração entre academia e setor produtivo, posicion
   {
     id: 2,
     titulo:
-      "i2TA estabelece cooperação com o CETELI/UFAM para desenvolvimento tecnológico de fronteira",
+      "i2TA encaminha cooperação com o CETELI/UFAM para desenvolvimento tecnológico de fronteira",
     resumo:
-      "A formalização com o CETELI, por meio do professor Kenny Vinente, conecta pesquisa acadêmica de alto nível a aplicações práticas em IA, sistemas embarcados e automação industrial.",
-    corpo: `O i2TA formalizou cooperação técnica com o Centro de Tecnologia Eletrônica e da Informação (CETELI) da Universidade Federal do Amazonas (UFAM), por meio do professor Dr. Kenny Vinente, coordenador do centro.
+      "A articulação com o CETELI, por meio do professor Kenny Vinente, conectará pesquisa acadêmica de alto nível a aplicações práticas em IA, sistemas embarcados e automação industrial.",
+    corpo: `O i2TA está em processo de firmar um termo de cooperação com o Centro de Tecnologia Eletrônica e da Informação (CETELI) da Universidade Federal do Amazonas (UFAM), por meio do professor Dr. Kenny Vinente, coordenador do centro.
 
 O CETELI é referência nacional em pesquisa aplicada a sistemas embarcados, microeletrônica e automação — áreas estratégicas que se alinham diretamente com a agenda de inovação do i2TA.
 
@@ -54,7 +54,7 @@ A parceria prevê o desenvolvimento conjunto de projetos em inteligência artifi
 
 "A integração do conhecimento de fronteira do CETELI com a agilidade de execução do i2TA cria um ecossistema de P&D&I diferenciado, capaz de transformar papers em produtos", destacou Leonardo Câmara, Diretor Executivo do i2TA.
 
-Com essa iniciativa, o i2TA amplia sua capacidade técnica e consolida sua atuação como Instituição Científica e Tecnológica (ICT) voltada à inovação aplicada no coração da Amazônia.`,
+Com essa iniciativa, o i2TA avança na ampliação de sua capacidade técnica e na consolidação de sua atuação como Instituição Científica e Tecnológica (ICT) voltada à inovação aplicada no coração da Amazônia.`,
     categoria: "Parcerias",
     data: "02 Abr 2026",
     tempoLeitura: 5,
@@ -69,7 +69,7 @@ Com essa iniciativa, o i2TA amplia sua capacidade técnica e consolida sua atua�
       "O instituto dá passo estratégico rumo à certificação que habilitará a execução de projetos de PD&I com recursos provenientes dos incentivos fiscais da Zona Franca de Manaus.",
     corpo: `O Instituto de Inteligência e Tecnologia Aplicada da Amazônia — i2TA — deu início ao processo formal de credenciamento junto ao Comitê das Atividades de Pesquisa e Desenvolvimento na Amazônia (CAPDA).
 
-A certificação pelo CAPDA é requisito fundamental para que uma ICT possa atuar como executora de projetos de Pesquisa, Desenvolvimento e Inovação (PD&I) financiados pela Lei de Informática (Lei nº 8.387/1991) — mecanismo de incentivo fiscal que sustenta o ecossistema de inovação da Zona Franca de Manaus.
+O Credenciamento pelo CAPDA é requisito fundamental para que uma ICT possa atuar como executora de projetos de Pesquisa, Desenvolvimento e Inovação (PD&I) financiados pela Lei de Informática (Lei nº 8.387/1991) — mecanismo de incentivo fiscal que sustenta o ecossistema de inovação da Zona Franca de Manaus.
 
 O processo de credenciamento envolve três frentes simultâneas: a estruturação institucional completa (governança, compliance, infraestrutura laboratorial), a consolidação de uma equipe técnica qualificada com titulação e produção científica compatíveis, e a construção de um portfólio de projetos alinhados às demandas da indústria local e às vocações da Amazônia.
 
