@@ -797,6 +797,31 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Botões de download do papel timbrado -->
+                    <div class="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
+                        <button
+                            id="download-papel-pdf"
+                            class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-gradient-official text-white text-xs font-bold uppercase tracking-[0.15em] font-display shadow-[0_8px_24px_rgba(123,63,228,0.35)] hover:shadow-[0_12px_32px_rgba(0,224,255,0.45)] hover:-translate-y-0.5 transition-all"
+                            type="button"
+                        >
+                            <i class="ph-bold ph-file-pdf text-base"></i>
+                            <span>Baixar PDF</span>
+                        </button>
+                        <a
+                            href="https://www.canva.com/design/DAHIEXJNM0I/GlOzPm-9Y55S4SKWgzKnBg/edit"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-white/5 border border-i2ta-cyan/40 text-i2ta-white text-xs font-bold uppercase tracking-[0.15em] font-display hover:bg-white/10 hover:border-i2ta-cyan/70 hover:-translate-y-0.5 transition-all"
+                        >
+                            <i class="ph-bold ph-paint-brush-broad text-base"></i>
+                            <span>Editar no Canva</span>
+                            <i class="ph-bold ph-arrow-square-out text-sm opacity-70"></i>
+                        </a>
+                    </div>
+                    <p class="mt-3 text-[10px] text-i2ta-neutral-gray text-center font-mono uppercase tracking-[0.2em]">
+                        Baixe em PDF ou edite direto no Canva
+                    </p>
                 </div>
 
                 <div class="gsap-reveal group" style="transition-delay: 200ms;">
@@ -1558,6 +1583,84 @@
             initParticles();
             animateParticles();
         });
+    </script>
+
+    <!-- ───────────────────────────────────────────────────────────── -->
+    <!-- Template OCULTO do papel timbrado em branco (usado pra PDF) -->
+    <!-- Renderizado fora da tela em A4 fixo (210mm x 297mm @ 96dpi)  -->
+    <!-- ───────────────────────────────────────────────────────────── -->
+    <div id="papel-timbrado-template" style="position: fixed; left: -9999px; top: 0; width: 794px; height: 1123px; background: #ffffff; padding: 56px 56px 48px; box-sizing: border-box; font-family: 'Inter', sans-serif; color: #1f2937; display: flex; flex-direction: column; overflow: hidden;">
+        <!-- Faixa gradiente topo -->
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 8px; background: linear-gradient(90deg, #7B3FE4 0%, #3B1E7A 50%, #00E0FF 100%);"></div>
+
+        <!-- Marca d'água centralizada (logo nova) -->
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.07; pointer-events: none;">
+            <img src="https://i.imgur.com/G3Y7Gig.png" alt="" crossorigin="anonymous" style="width: 420px;">
+        </div>
+
+        <!-- Cabeçalho -->
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px; position: relative; z-index: 10; padding-top: 16px;">
+            <img src="https://i.imgur.com/G3Y7Gig.png" alt="i2TA" crossorigin="anonymous" style="height: 44px; object-fit: contain;">
+            <div style="font-family: 'Space Grotesk', monospace; font-size: 9px; color: #9ca3af; text-align: right; text-transform: uppercase; letter-spacing: 0.2em; font-weight: 500;">
+                DOC_ID: ____________<br>DATE: __/__/____
+            </div>
+        </div>
+
+        <!-- Miolo em branco (área editável) -->
+        <div style="flex: 1; position: relative; z-index: 10;"></div>
+
+        <!-- Rodapé -->
+        <div style="margin-top: auto; padding-top: 16px; border-top: 1px solid #e5e7eb; position: relative; z-index: 10; display: flex; justify-content: space-between; align-items: center; font-family: 'Space Grotesk', monospace; font-size: 8px; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.2em;">
+            <div>[ i2ta.org.br ]</div>
+            <div style="text-align: right;">SYS_COM: contato@i2ta.org.br</div>
+        </div>
+    </div>
+
+    <!-- ───────────────────────────────────────────────────────────── -->
+    <!-- Bibliotecas de download                                       -->
+    <!-- ───────────────────────────────────────────────────────────── -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <!-- Lógica de download do papel timbrado (PDF) -->
+    <script>
+        (function () {
+            const btnPdf = document.getElementById('download-papel-pdf');
+            const template = document.getElementById('papel-timbrado-template');
+
+            if (!btnPdf || !template) return;
+
+            // ── Download PDF (html2canvas + jsPDF) ──────────────────────
+            btnPdf.addEventListener('click', async function () {
+                const original = btnPdf.innerHTML;
+                btnPdf.disabled = true;
+                btnPdf.innerHTML = '<i class="ph-bold ph-spinner-gap text-base animate-spin"></i><span>Gerando...</span>';
+
+                try {
+                    // html2canvas captura a div oculta em alta resolução
+                    const canvas = await html2canvas(template, {
+                        scale: 2,
+                        useCORS: true,
+                        backgroundColor: '#ffffff',
+                        logging: false,
+                    });
+
+                    const imgData = canvas.toDataURL('image/png');
+                    const { jsPDF } = window.jspdf;
+                    // A4: 210mm x 297mm em landscape
+                    const pdf = new jsPDF({ unit: 'mm', format: 'a4', orientation: 'portrait' });
+                    pdf.addImage(imgData, 'PNG', 0, 0, 210, 297);
+                    pdf.save('papel-timbrado-i2ta.pdf');
+                } catch (err) {
+                    console.error('Erro PDF:', err);
+                    alert('Não foi possível gerar o PDF. Tente novamente.');
+                } finally {
+                    btnPdf.disabled = false;
+                    btnPdf.innerHTML = original;
+                }
+            });
+
+        })();
     </script>
 </body>
 </html>
