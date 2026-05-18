@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: i2ta-site
+    runtime: static
+    plan: free
+    rootDir: .
+    buildCommand: corepack enable && pnpm install --frozen-lockfile && pnpm --filter @workspace/i2ta-site run build
+    staticPublishPath: artifacts/i2ta-site/dist/public
+    pullRequestPreviewsEnabled: false
+    envVars:
+      - key: NODE_VERSION
+        value: 22.11.0
+      - key: PNPM_VERSION
+        value: 10.33.0
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    headers:
+      - path: /assets/*
+        name: Cache-Control
+        value: public, max-age=31536000, immutable
+      - path: /*
+        name: X-Frame-Options
+        value: SAMEORIGIN
+      - path: /*
+        name: Referrer-Policy
+        value: strict-origin-when-cross-origin
